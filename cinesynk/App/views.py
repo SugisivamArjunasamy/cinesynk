@@ -7,3 +7,5 @@ def profile(request):
     return render(request, 'profile.html')
 def studioProfile(request):
     return render(request, 'studioProfile.html')
+def login(request):
+    return render(request, 'login.html')
