@@ -114,6 +114,40 @@
           position: relative;
           width: 100%;
         }
+
+        .row-mine {
+            background-color: #212121; /* Dark background */
+            overflow: hidden;
+            width: 100%;
+            border-radius: 3px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .like-button {
+            color: #fff; /* White text color */
+            text-decoration: none;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+            border-radius: 3px;
+        }
+
+        .like-button:hover {
+            background-color: #424242; /* Darker background on hover */
+        }
+
+        .like-button.active {
+            background-color: #4CAF50; /* Active button color */
+        }
+        
+        .description-section {
+            background-color: #333; /* Dark background color */
+            color: #fff; /* White text color */
+            padding: 20px;
+            text-align: center;
+        }
+
     </style>
     <script>
       function toggleMute() {
@@ -268,20 +302,7 @@
                                 </div>
                               </div>
                         </div>
-                        <div class="col">
-                            <div class="flip-card">
-                                <div class="flip-card-inner">
-                                  <div class="flip-card-front">
-                                    <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
-                                  </div>
-                                  <div class="flip-card-back">
-                                    <h1>Master</h1> 
-                                    <p>Master one of the best tamil movie</p> 
-                                    <p>We love that Movie</p>
-                                  </div>
-                                </div>
-                              </div>
-                        </div>
+                        
                     </div>
                 </div>
                   
@@ -292,9 +313,15 @@
                     <div class="post">
                         <div>
                             <img src="https://images6.alphacoders.com/134/1340814.jpeg" alt="Profile Picture">
-                            <a><i class="fa fa-heart"></i></a>
+                            <div class="row-mine" style="margin-top: 7px;">
+                                <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
+                                <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                                <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
+                              </div>
+                              <div class="description-section">
+                                <p>This is a description of your website or application. You can provide information about its purpose, features, or anything else you'd like to convey to your users.</p>
+                              </div>
                             
-                            <p>Sukuna King Of Curses</p>
                         </div>
                     </div>
                     <div class="post">
@@ -302,6 +329,14 @@
                             <video class="post-video" loop autoplay  muted>
                               <source src="{%static 'videos/movie.mp4'%}">
                             </video>
+                            <div class="row-mine" style="margin-top: 2px;">
+                                <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
+                                <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                                <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
+                              </div>
+                              <div class="description-section">
+                                <p>This is a description of your website or application. You can provide information about its purpose, features, or anything else you'd like to convey to your users.</p>
+                              </div>
                         </div>
                     </div>
                     <div class="post">
@@ -309,6 +344,14 @@
                             <video class="post-video" loop autoplay  muted>
                               <source src="{%static 'videos/video.mp4'%}">
                             </video>
+                            <div class="row-mine" style="margin-top: 2px;">
+                                <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
+                                <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                                <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
+                              </div>
+                              <div class="description-section">
+                                <p>This is a description of your website or application. You can provide information about its purpose, features, or anything else you'd like to convey to your users.</p>
+                              </div>
                         </div>
                     </div>
                     
