@@ -1,12 +1,10 @@
-{% load static %}
+{%load static%}
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CineSynk</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
+    <title>Bootstrap demo</title>
     <style>
         .bg-custom-color {
             background-color: #000 !important; /* Change background color to black */
@@ -44,225 +42,102 @@
             transform: translateX(-50%);
             z-index: 1;
         }
-
-        /* Tab Styles */
-        .tab {
-            overflow: hidden;
-            border: 1px solid #000;
-            background-color: #000;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Smooth transition */
-            margin: 40px; 
-        }
-
-        /* Tab links */
-        .tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: background-color 0.3s;
-        }
-
-        /* Change background color of active tab */
-        /* Active tab */
-        .tab button.active {
-            background-color: #000;
-            border: 2px solid #FFF; /* Add border */
-            border-radius: 10px; /* Round the corners */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow */
-            transition: all 0.3s ease; /* Smooth transition */
-        }
-
-
-        /* Tab content */
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-            border: 1px solid #000;
-            border-top: none;
-        }
-
-        /* Show tab content when tab link is clicked */
-        .active-tab {
-            display: block;
-        }
     </style>
-    <script>
-        // Function to open a specific tab content
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none"; // Hide all tab contents
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block"; // Display only the clicked tab content
-            evt.currentTarget.className += " active";
-        }
-    </script>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg bg-custom-color">
-    <div class="container-fluid">
-        <img onclick="redirect()" src="{% static '/images/cinesynk.png' %}" alt="" style="width: 50px; height: 50px;">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Posts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'studioProfile' %}">Studio Profiles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Podcasts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notifications</a>
-                </li>
-            </ul>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-custom-color">
+        <div class="container-fluid">
+                <img src="{%static '/images/cinesynk.png'%}" alt="" style="width: 50px; height: 50px;">
+            <!-- <h1 class="navbar-brand bg" href="#">CineSynk</h1> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Posts</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'studioProfile' %}">Studio Profiles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Podcasts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Notifications</a>
+                    </li>
+                </ul>
+    
+                <div>
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </div>
+                <div class="">
+                    <img onclick="redirect()" src="https://cdn-icons-png.flaticon.com/128/149/149071.png" alt="" style="width: 30px; height: 30px;">
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="image-container">
+        <img src="https://imgs.search.brave.com/DVYz615KZd-EZZ0vO0dugnNr7LwtCUQsaiO9ceByKTs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9i/ZWF1dGlmdWwtbW91/bnRhaW5zLWxhbmRz/Y2FwZV8yMy0yMTUx/MTUxMDgxLmpwZz9z/aXplPTYyNiZleHQ9/anBn" class="img-fluid" alt="...">
+        <div class="second-image">
+            <img src="https://th.bing.com/th/id/OIP.TE2tb5p9A56cIPIEy7UVUAHaHa?w=202&h=202&c=7&r=0&o=5&dpr=1.8&pid=1.7" alt="..." style="border-radius:50%;">
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row" style="padding-left: 330px; color: #FFFFFF;">
+                <h1>Hinata</h1>
+                <div>
+                    <a>
+                        <i class="fa fa-suitcase" style="font-size: 15px; color: #FFFFFF; margin-right: 10px;"></i>
+                        5 years 
+                    </a>
+                </div>
+                <div>
+                    <a>
+                        <i class="fas fa-map-marker-alt" style="font-size: 15px; color: #FFFFFF; margin-right: 13px;"></i>
+                        Chennai 
+                    </a>
+                </div>
+            </div>
             
-            <div>
-                <img onclick="redirect()" src="https://cdn-icons-png.flaticon.com/128/149/149071.png" alt="" style="width: 30px; height: 30px;">
+            
+            <div class="row" style="margin-top: 60px;font-size:x-large; padding: 10px;">
+                <a> About Me : </a>
             </div>
-        </div>
+            <div class="row" style="padding: 10px;">
+                <a>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus nam tenetur similique sed illum? Molestias asperiores excepturi repudiandae minus esse labore facilis veritatis, a atque, incidunt pariatur facere, illo minima?</a>
+            </div>
+              
+              
+          </div>
     </div>
-</nav>
-<div class="image-container">
-    <img src="https://imgs.search.brave.com/DVYz615KZd-EZZ0vO0dugnNr7LwtCUQsaiO9ceByKTs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9i/ZWF1dGlmdWwtbW91/bnRhaW5zLWxhbmRz/Y2FwZV8yMy0yMTUx/MTUxMDgxLmpwZz9z/aXplPTYyNiZleHQ9/anBn" class="img-fluid" alt="...">
-    <div class="second-image">
-        <img src="https://th.bing.com/th/id/OIP.TE2tb5p9A56cIPIEy7UVUAHaHa?w=202&h=202&c=7&r=0&o=5&dpr=1.8&pid=1.7" alt="..." style="border-radius:50%;">
+
+    <!-- <div style="margin-left: 100px; margin-right: 100px;"> -->
+        <div>
+        <ul class="nav nav-pills" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0" style="border-color: #FFFFFF;">...</div>
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">Home.</div>
+            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">contatct.</div>
+          </div>
     </div>
-</div>
-<div>
-    <div class="container">
-        <div class="row" style="padding-left: 330px; color: #FFFFFF;">
-            <h1>Hinata</h1>
-            <div>
-                <a>
-                    <i class="fa fa-suitcase" style="font-size: 15px; color: #FFFFFF; margin-right: 10px;"></i>
-                    5 years 
-                </a>
-            </div>
-            <div>
-                <a>
-                    <i class="fas fa-map-marker-alt" style="font-size: 15px; color: #FFFFFF; margin-right: 13px;"></i>
-                    Chennai 
-                </a>
-            </div>
-        </div>
-        
-        
-        <div class="row" style="margin-top: 60px;font-size:x-large; padding: 10px;">
-            <a> About Me : </a>
-        </div>
-        <div class="row" style="padding: 10px;">
-            <a>I am a director who wants to become someone that the world recognizes as a real director.</a>
-        </div>
-          
-          
-      </div>
-</div>
-
-<div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'Tab1')">Tab 1</button>
-    <button class="tablinks" onclick="openTab(event, 'Tab2')">Tab 2</button>
-</div>
-
-<div id="Tab1" class="tabcontent active-tab">
-    <div class="container">
-        <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="card-group">
-                        <div class="card">
-                            <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" class="card-img-top" alt="..." style="width: 270px;height: 400px;padding: 5px;">
-                            <div class="card-body">
-                                <h5 class="card-title">Master</h5>
-                                <p class="card-text">Master one of the best tamil movie</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 months ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="https://imgs.search.brave.com/xuKU_7eNM30Nq64OkEa806lSWQqv86S9iRX7kEnWsLU/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2JhLzZh/L2YyL2JhNmFmMmQ1/NGZhMjA3NjYyMDk2/MDQwNTNkZjg5YzRh/LmpwZw" class="card-img-top" alt="..." style="width: 270px;height: 400px;padding: 5px;">
-                            <div class="card-body">
-                                <h5 class="card-title">Vikram</h5>
-                                <p class="card-text">Vikram one of the best tamil movie . About the drug free world</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 months ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="https://imgs.search.brave.com/pQK78hSjltHsOy1DHNWNa8Vhmr_uBSitB5ro9_kkWmw/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/dG9wLTUtdGFtaWwt/bW92aWVzLW9mLTIw/MjMtdjAtMDBlejZu/MmIxaDhjMS5qcGc_/d2lkdGg9NjQwJmNy/b3A9c21hcnQmYXV0/bz13ZWJwJnM9ZDIz/M2ZiMWFmYjY5ZTBj/YTUwMzc2ODUzYjkz/NzRhMTgwOWU5NDFj/MQ" class="card-img-top" alt="..." style="width: 270px;height: 400px;padding: 5px;">
-                            <div class="card-body">
-                                <h5 class="card-title">Viduthalai</h5>
-                                <p class="card-text">Viduthalai one of the best tamil movie . About the peoples freedom</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 4 days ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="https://imgs.search.brave.com/DzbtAhfb43R_r0GoSL0B5UncjFyGg-5qDTibF8E54eI/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/dGFtaWxpYW4uaW8v/d3AtY29udGVudC91/cGxvYWRzL3RhbWls/L21vdmllLzQ1MC9T/YWJhLU5heWFnYW4t/MjAyMy1Qb3N0ZXIu/anBn" class="card-img-top" alt="..." style="width: 270px;height: 400px;padding: 5px;">
-                            <div class="card-body">
-                                <h5 class="card-title">Saba Naayagan</h5>
-                                <p class="card-text">Kathaa Naayagan The best love movie of 2023</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="Tab2" class="tabcontent">
-    <div class="container">
-        <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="card-group">
-                        <div class="card-group">
-                            <div class="card"  style="height: 450px;">
-                                <div class="card-title" style="font-size: x-large;">
-                                    <a>Master first look</a>
-                                  </div>
-                              <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" class="card-img-top" alt="..." style="width: 270px;height: 400px;padding: 5px;">
-                            </div>
-                            <div class="card"  style="height: 450px;">
-                                <div class="card-title" style="font-size: x-large; padding: 5px;">
-                                    <a>Vikram release</a>
-                                  </div>
-                              <img src="https://imgs.search.brave.com/xuKU_7eNM30Nq64OkEa806lSWQqv86S9iRX7kEnWsLU/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2JhLzZh/L2YyL2JhNmFmMmQ1/NGZhMjA3NjYyMDk2/MDQwNTNkZjg5YzRh/LmpwZw" class="card-img-top" alt="..." style="width: 270px;height: 400px;padding: 5px;">
-                            </div>
-                            <div class="card"  style="height: 450px;">
-                                <div class="card-title" style="font-size: x-large; padding: 5px;">
-                                    <a>Saba Naayagan release</a>
-                                  </div>
-                              <img src="https://imgs.search.brave.com/zAX1Pli7yhBqXoyf6ycTUOPuzNQa6XPJDWBnpbLDyBA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1QlpUQTVNRFEw/T0RRdE1HVTFOeTAw/Wm1KakxUZzVNbUV0/WWpabE5HVXhObVl4/TXpobFhrRXlYa0Zx/Y0dkZVFYVnlNVFV6/TlRnek56TTAuX1Yx/X1FMNzVfVVkyODFf/Q1IxMCwwLDE5MCwy/ODFfLmpwZw" class="card-img-top" alt="..." style="width: 270px;height: 400px;padding: 5px;">
-                            </div>
-                            <div class="card"  style="height: 450px;">
-                                <div class="card-title" style="font-size: x-large; padding: 5px;">
-                                    <a>Master Release</a>
-                                  </div>
-                              <img src="https://imgs.search.brave.com/O1_V_DZ6De7k7xJkFK0Crf7BuMANffi_3ZgC-Bxswsc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvZW4vdGh1bWIv/NS81My9NYXN0ZXJf/MjAyMV9wb3N0ZXIu/anBnLzIyMHB4LU1h/c3Rlcl8yMDIxX3Bv/c3Rlci5qcGc" class="card-img-top" alt="..." style="width: 270px;height: 400px;padding: 5px;">
-                            </div>
-                            
-                          </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
 </html>
