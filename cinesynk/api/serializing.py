@@ -1,9 +1,24 @@
 from rest_framework import serializers
 from App.models import ProfessionalUser
 
-class GetProffesionalUserSerializer(serializers.Serializer):
+class EmailSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
+class UpdateFieldSerializer(serializers.Serializer):
+    field_name = serializers.CharField()
+    field_value = serializers.CharField()
+    email = serializers.EmailField()
+
+class CreateProfessionalUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProfessionalUser
+        fields = [ 'name', 'email', 'password', 'about', 'profile_img', 'experience', 'location', 'user_type']
+        
+    def create(self, validated_data):
+        validated_data['movies_worked'] = []
+        validated_data['posts'] = []
+        return super().create(validated_data)
+    
 class ProfessionalUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfessionalUser
