@@ -18,3 +18,5 @@ def studioProfile(request):
     return render(request, 'studioProfile.html')
 def login(request):
     return render(request, 'login.html')
+def guRegister(request):
+    return render(request, 'guRegister.html')
