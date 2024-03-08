@@ -20,3 +20,9 @@ def login(request):
     return render(request, 'login.html')
 def guRegister(request):
     return render(request, 'guRegister.html')
+def services(request):
+    return render(request,'services.html')
+def audioservices(request):
+    return render(request, 'audiose.html')
+def vedioservices(request):
+    return render(request,'vediose.html')
