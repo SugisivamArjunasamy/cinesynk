@@ -38,9 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 EXTERNAL_APPS = [
-    'App'
+    'App',
+    'api'
 ]
 
 INSTALLED_APPS.extend(EXTERNAL_APPS)

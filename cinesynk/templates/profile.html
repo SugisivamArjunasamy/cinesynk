@@ -240,23 +240,23 @@
     <div class="image-container">
         <img src="https://imgs.search.brave.com/DVYz615KZd-EZZ0vO0dugnNr7LwtCUQsaiO9ceByKTs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9i/ZWF1dGlmdWwtbW91/bnRhaW5zLWxhbmRz/Y2FwZV8yMy0yMTUx/MTUxMDgxLmpwZz9z/aXplPTYyNiZleHQ9/anBn" class="img-fluid" alt="...">
         <div class="second-image">
-            <img src="https://th.bing.com/th/id/OIP.TE2tb5p9A56cIPIEy7UVUAHaHa?w=202&h=202&c=7&r=0&o=5&dpr=1.8&pid=1.7" alt="..." style="border-radius:50%;">
+            <img src={{user.profile_img}} alt="..." style="border-radius:50%;">
         </div>
     </div>
     <div>
         <div class="container">
             <div class="row" style="padding-left: 330px; color: #FFFFFF;">
-                <h1>Hinata</h1>
+                <h1>{{user.name}}</h1>
                 <div>
                     <a>
                         <i class="fa fa-suitcase" style="font-size: 15px; color: #FFFFFF; margin-right: 10px;"></i>
-                        5 years 
+                        {{user.experience}} 
                     </a>
                 </div>
                 <div>
                     <a>
                         <i class="fas fa-map-marker-alt" style="font-size: 15px; color: #FFFFFF; margin-right: 13px;"></i>
-                        Chennai 
+                        {{user.location}} 
                     </a>
                 </div>
             </div>
@@ -266,7 +266,7 @@
                 <a> About Me : </a>
             </div>
             <div class="row" style="padding: 10px;">
-                <a>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus nam tenetur similique sed illum? Molestias asperiores excepturi repudiandae minus esse labore facilis veritatis, a atque, incidunt pariatur facere, illo minima?</a>
+                <a>{{user.about}}</a>
             </div>
               
               
@@ -286,63 +286,22 @@
             <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0" style="border-color: #FFFFFF;">
                 <div class="container">
                     <div class="row">
+                        {%for movie in user.movies_worked%}
                         <div class="col">
-                            <div class="flip-card">
-                                <div class="flip-card-inner">
-                                  <div class="flip-card-front">
-                                    <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
-                                  </div>
-                                  <div class="flip-card-back">
-                                    <h1>Master</h1> 
-                                    <p>Master one of the best tamil movie</p> 
-                                    <p>We love that Movie</p>
-                                  </div>
-                                </div>
+                          <div class="flip-card">
+                              <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                  <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
                               </div>
-                        </div>
-                        <div class="col">
-                            <div class="flip-card">
-                                <div class="flip-card-inner">
-                                  <div class="flip-card-front">
-                                    <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
-                                  </div>
-                                  <div class="flip-card-back">
-                                    <h1>Master</h1> 
-                                    <p>Master one of the best tamil movie</p> 
-                                    <p>We love that Movie</p>
-                                  </div>
-                                </div>
+                              <div class="flip-card-back">
+                                  <h1>Master</h1> 
+                                  <p>Master one of the best tamil movie</p> 
+                                  <p>We love that Movie</p>
                               </div>
-                        </div>
-                        <div class="col">
-                            <div class="flip-card">
-                                <div class="flip-card-inner">
-                                  <div class="flip-card-front">
-                                    <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
-                                  </div>
-                                  <div class="flip-card-back">
-                                    <h1>Master</h1> 
-                                    <p>Master one of the best tamil movie</p> 
-                                    <p>We love that Movie</p>
-                                  </div>
-                                </div>
                               </div>
+                          </div>
                         </div>
-                        <div class="col">
-                            <div class="flip-card">
-                                <div class="flip-card-inner">
-                                  <div class="flip-card-front">
-                                    <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
-                                  </div>
-                                  <div class="flip-card-back">
-                                    <h1>Master</h1> 
-                                    <p>Master one of the best tamil movie</p> 
-                                    <p>We love that Movie</p>
-                                  </div>
-                                </div>
-                              </div>
-                        </div>
-                        
+                        {%endfor%}
                     </div>
                 </div>
                   
