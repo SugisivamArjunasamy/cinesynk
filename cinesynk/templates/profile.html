@@ -147,15 +147,55 @@
             padding: 20px;
             text-align: center;
         }
+        .button-mine {
+          color: #fff; /* White text color */
+          text-decoration: none;
+          padding: 10px 20px;
+          transition: background-color 0.3s;
+          border-radius: 3px;
+          background-color: #3498db; /* Default background color */
+          border: none; /* Remove border */
+          cursor: pointer;
+          display: inline-block;
+        }
+
+        .button-mine:hover {
+          background-color: #2980b9; /* Change background color on hover */
+        }
+        #muteUnmuteIcon {
+          margin-right: 5px;
+        }
+
+        #muteUnmuteText {
+          margin-left: 5px;
+        }
+
+
 
     </style>
     <script>
       function toggleMute() {
-          var video = document.getElementById("post-video");
+          var video = document.querySelector(".post-video");
+          var button = document.getElementById("muteUnmuteText");
+          
           if (video.muted) {
               video.muted = false;
+              button.textContent = "Mute";
           } else {
               video.muted = true;
+              button.textContent = "Unmute";
+          }
+      }
+      function toggleMute2() {
+          var video = document.querySelector(".post-video");
+          var button = document.getElementById("muteUnmuteText2");
+          
+          if (video.muted) {
+              video.muted = false;
+              button.textContent = "Mute";
+          } else {
+              video.muted = true;
+              button.textContent = "Unmute";
           }
       }
   </script>
@@ -325,34 +365,43 @@
                         </div>
                     </div>
                     <div class="post">
-                        <div>
-                            <video class="post-video" loop autoplay  muted>
-                              <source src="{%static 'videos/movie.mp4'%}">
-                            </video>
-                            <div class="row-mine" style="margin-top: 2px;">
-                                <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
-                                <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
-                                <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
-                              </div>
-                              <div class="description-section">
-                                <p>This is a description of your website or application. You can provide information about its purpose, features, or anything else you'd like to convey to your users.</p>
-                              </div>
+                      <div>
+                        <video class="post-video" loop autoplay muted>
+                            <source src="{%static 'videos/movie.mp4'%}">
+                        </video>
+                        <div class="row-mine" style="margin-top: 2px;">
+                            <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
+                            <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                            <button class="button-mine" id="muteUnmuteButton" onclick="toggleMute()">
+                                <i id="muteUnmuteIcon" class="fa fa-volume-up" style="margin-right: 2px;"></i>
+                                <span id="muteUnmuteText">UnMute</span>
+                            </button>
+                            <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
+                        </div>
+                        <div class="description-section">
+                            <p>This is a description of your website or application. You can provide information about its purpose, features, or anything else you'd like to convey to your users.</p>
                         </div>
                     </div>
                     <div class="post">
                         <div>
                             <video class="post-video" loop autoplay  muted>
-                              <source src="{%static 'videos/video.mp4'%}">
+                                <source src="{%static 'videos/video.mp4'%}">
                             </video>
                             <div class="row-mine" style="margin-top: 2px;">
                                 <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
                                 <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                                <button class="button-mine" id="muteUnmuteButton2" onclick="toggleMute2()">
+                                    <i id="muteUnmuteIcon2" class="fa fa-volume-up" style="margin-right: 2px;"></i>
+                                    <span id="muteUnmuteText2">UnMute</span>
+                                </button>
                                 <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
-                              </div>
-                              <div class="description-section">
+                            </div>
+                            <div class="description-section">
                                 <p>This is a description of your website or application. You can provide information about its purpose, features, or anything else you'd like to convey to your users.</p>
-                              </div>
+                            </div>
                         </div>
+                    </div>
+                    
                     </div>
                     
                 </div>
