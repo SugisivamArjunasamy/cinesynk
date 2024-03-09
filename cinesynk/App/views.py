@@ -26,3 +26,11 @@ def audioservices(request):
     return render(request, 'audiose.html')
 def vedioservices(request):
     return render(request,'vediose.html')
+def registerop(request):
+    return render(request,'registerop.html')
+def GeneralRegister(request):
+    return render(request, 'guRegister.html')
+def directorRegister(request):
+    return render(request, 'directorRegister.html')
+def studioRegister(request):
+    return render(request,'studioRegister.html')

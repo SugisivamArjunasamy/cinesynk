@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+          background-color: #222; /* Dark background color */
+          color: #fff; /* White text color */
+        }
+        .image-cont{
+          background: url("https://media.istockphoto.com/id/1034331322/photo/background-of-watching-movies-objects-on-the-left-with-reel.jpg?s=612x612&w=0&k=20&c=Ppp8xfMPWa3soWPBMY1NL3i0_yju4L4fOtCSQy_yx8c=");
+          opacity: 80%;
+        }
+        .container {
+          display: flex;
+          height: 100vh;
+          background: url("https://png.pngtree.com/thumb_back/fw800/back_our/20190622/ourmid/pngtree-film-and-television-film-festival-retro-wind-camera-film-poster-image_215411.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          opacity: 80%;
+        }
+        .register-section {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .register-form {
+          padding: 30px;
+          background: #333; /* Dark background for form */
+          border-radius: 10px;
+          opacity: 0.7;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+          width: 400px; /* Medium size */
+        }
+        .register-form h1 {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        .register-form input[type="email"],
+        .register-form input[type="text"],
+        .register-form input[type="password"],
+        .register-form input[type="confirm password"],
+        .register-form button,
+        .register-form .register-button {
+          width: calc(100% - 24px); /* Adjusted for button margin */
+          padding: 12px;
+          margin-bottom: 20px;
+          border: 1px solid #666; /* Dark border color */
+          border-radius: 5px;
+          box-sizing: border-box;
+          font-size: 16px;
+          background-color: #444; /* Dark background for input */
+          color: #fff; /* White text color */
+        }
+        .register-form button,
+        .register-form .register-button {
+          background-color: #4CAF50;
+          color: white;
+          cursor: pointer;
+        }
+        .register-form button:hover,
+        .register-form .register-button:hover {
+          background-color: #45a049;
+        }
+        .register-button {
+          background-color: #3498db;
+        }
+        .register-button:hover {
+          background-color: #2980b9;
+        }
+        .message {
+          text-align: center;
+          margin-bottom: 20px;
+          color: #aaa; /* Light text color */
+        }
+        .message a {
+          color: #fff; /* White link color */
+        }
+      </style>
+</head>
+<body>
+    <div class="container">
+        <div class="register-section">
+          <form class="register-form" action="#" method="POST">
+        <h1>Register For Director</h1>
+        <input type="email" name="email" placeholder="email" required>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm password" placeholder="confirm Password" required>
+        <button type="submit">Register</button>
+        <p class="message">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+            
+          </form>
+        </div>
+    </div>
+</body>
+</html>
