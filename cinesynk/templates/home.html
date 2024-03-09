@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CineSynk</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .bg-custom-color {
             background-color: #000 !important; /* Change background color to black */
@@ -23,7 +24,136 @@
             text-decoration: none;
             margin: 0 10px;
         }
+        .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
+.card {
+  width: 100%;  /* Set a maximum width */
+  max-width: 1200px;
+  height: 602px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.5); /* Red shadow */
+}
+
+.card-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-img-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 24px;
+  margin: 20px;
+}
+
+.card-text {
+  font-size: 20px;
+  margin: 20px;
+  padding: 20px;
+  color: #FFFFFF;
+}
+
+.form-control {
+  margin-top: 10px;
+}
+
+#action-button {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-lg {
+  font-size: 18px;
+  padding: 15px 30px;
+}
+
+.btn-primary {
+  background-color: #b3150092;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #e11b46;
+}
+
+.btn-radius {
+  border-radius: 25px;
+}
+
+.fa-arrow-circle-right {
+  margin-left:10px;
+}
+
+.form-control {
+  display: flex;
+  justify-content: center;
+  background-color: #000;
+  border-radius: 30px;
+  width: 650px;
+}
+
+.btn {
+  border-radius: 20px;
+}
+
+.me-2 {
+  width: 630px;
+  border-radius: 20px;
+}
+
+.row {
+  /* Dark background */
+  overflow: hidden;
+  width: 100%;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center; /* Changed from space-around to center */
+  align-items: center;
+}
+.container-mine {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  ol {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    color: #888;
+  }
+  
+  p {
+    color: #666;
+  }
   
     </style>
     <script>
@@ -66,5 +196,120 @@
         </div>
     </div>
 </nav>
+<div class="container">
+    <div class="card text-bg-dark">
+        <img src="https://c0.wallpaperflare.com/preview/539/551/580/analog-analogue-antique-black-and-white.jpg" class="card-img" alt="..." style="max-width: 100%; height: 600px;">
+        <div class="card-img-overlay">
+            <div class="row">
+            <h5 class="card-title" style="color: #e11b46;">CIneSynk</h5>
+            </div>
+            <div class="row" style="margin: 10px;">
+                <form class="form-control d-flex" role="search">
+                    <input class="me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            <p class="card-text">
+                Finding video and audio production studios entails exploring venues outfitted with cutting-edge equipment to craft top-tier multimedia content. These studios provide comprehensive services spanning recording, editing, and post-production, catering to diverse needs like music production, filmmaking, podcast creation, and beyond. Equipped with advanced technology and skilled professionals, they offer a creative environment conducive to bringing ideas to life. Whether for commercial projects, artistic endeavors, or personal ventures, these studios serve as hubs of innovation and excellence, enabling clients to achieve their vision with precision and impact. Thorough research ensures selecting the right studio aligning with specific requirements and budgetary constraints.</p>
+            <div id="action-button">
+                <a href="{% url 'services' %}" class="btn btn-lg btn-radius btn-primary">Get Services <i class="fas fa-arrow-circle-right ml-4"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-mine">
+    <h1 style="color: #999;">Features of Video Production Studios</h1>
+    <ol>
+      <li>
+        <h2>Physical Space</h2>
+        <p>Video production studios typically consist of one or more rooms designed specifically for filming. These rooms are often soundproofed and can be customized with various sets, backgrounds, and lighting setups to accommodate different types of productions.</p>
+      </li>
+      <li>
+        <h2>Equipment</h2>
+        <p>Studios are equipped with a range of professional-grade video production equipment, including cameras, lighting fixtures, microphones, and audio recording equipment. They may also have green screens, props, and other tools to facilitate special effects and creative elements in productions.</p>
+      </li>
+      <li>
+        <h2>Editing Suites</h2>
+        <p>Many studios have dedicated editing suites equipped with powerful computers and software for post-production work. This includes tasks such as video editing, color grading, sound mixing, and special effects creation.</p>
+      </li>
+      <li>
+        <h2>Control Rooms</h2>
+        <p>Larger studios may have control rooms where directors, producers, and technicians can monitor and control various aspects of the production, such as camera feeds, audio levels, and lighting setups.</p>
+      </li>
+      <li>
+        <h2>Live Streaming Capabilities</h2>
+        <p>With the rise of online streaming platforms, many studios are equipped to facilitate live broadcasts and webcasts. This may include live switching equipment, streaming software, and high-speed internet connections.</p>
+      </li>
+      <li>
+        <h2>Green Rooms and Production Offices</h2>
+        <p>Studios often have additional spaces such as green rooms for talent to prepare before filming, as well as production offices for planning and administrative tasks related to the production.</p>
+      </li>
+      <li>
+        <h2>Technical Support</h2>
+        <p>Studios typically have technical staff available to assist with equipment setup, troubleshooting, and ensuring smooth operation during productions.</p>
+      </li>
+      <li>
+        <h2>Rental Services</h2>
+        <p>Some studios offer rental services, allowing external production teams to use their facilities and equipment for their projects. This can be a cost-effective option for independent filmmakers and smaller production companies.</p>
+      </li>
+      <li>
+        <h2>Customization Options</h2>
+        <p>Studios may offer customizable packages and services to meet the specific needs of clients, such as set design and construction, location scouting, and catering services.</p>
+      </li>
+      <li>
+        <h2>Accessibility</h2>
+        <p>Depending on the studio's location and facilities, it may be accessible to clients with disabilities, offering features such as wheelchair ramps, accessible restrooms, and assistive listening devices.</p>
+      </li>
+    </ol>
+    <h1 style="color: #999;">Features of Audio Production Studios</h1>
+  <ol>
+    <li>
+      <h2>Recording Rooms</h2>
+      <p>Audio studios typically have one or more recording rooms or booths designed to capture sound without interference from external noise. These rooms are acoustically treated to minimize reflections and provide a controlled environment for recording vocals, instruments, and other sound sources.</p>
+    </li>
+    <li>
+      <h2>Control Room</h2>
+      <p>The control room is the nerve center of the studio, where audio engineers and producers monitor and control the recording process. It houses mixing consoles, audio interfaces, monitors, and other equipment essential for capturing and manipulating audio signals.</p>
+    </li>
+    <li>
+      <h2>Equipment</h2>
+      <p>Audio production studios are equipped with a wide range of professional-grade equipment, including microphones, preamplifiers, compressors, equalizers, effects processors, and digital audio workstations (DAWs). These tools allow engineers to capture, process, and manipulate audio with precision and creativity.</p>
+    </li>
+    <li>
+      <h2>Isolation</h2>
+      <p>Isolation is crucial in audio production studios to prevent sound leakage between recording rooms and ensure clean recordings. This may involve soundproofing walls, floors, and ceilings, as well as using isolation booths and acoustic baffles to control reflections and reverberation.</p>
+    </li>
+    <li>
+      <h2>Monitoring</h2>
+      <p>High-quality monitoring systems are essential for accurate audio playback and mixing. Studios typically have studio monitors, headphones, and reference monitors calibrated to provide an accurate representation of the audio signal, allowing engineers to make informed decisions during the mixing and mastering process.</p>
+    </li>
+    <li>
+      <h2>Editing and Mixing</h2>
+      <p>Audio production studios are equipped with powerful digital audio workstations (DAWs) and software tools for editing and mixing audio tracks. Engineers can manipulate individual tracks, apply effects, adjust levels, and create complex arrangements to achieve the desired sound.</p>
+    </li>
+    <li>
+      <h2>Mastering</h2>
+      <p>Mastering is the final stage of audio production, where the final mix is optimized for distribution and playback across different formats and platforms. Studios may have dedicated mastering engineers and specialized equipment for this purpose, including equalizers, compressors, and limiters.</p>
+    </li>
+    <li>
+      <h2>Voiceover Booths</h2>
+      <p>Many audio production studios have dedicated booths or rooms for recording voiceovers, narration, and dialogue. These spaces are acoustically treated to minimize reflections and background noise, ensuring clear and professional recordings.</p>
+    </li>
+    <li>
+      <h2>Live Room</h2>
+      <p>Some audio studios have a live room or performance space designed for recording live instruments and ensembles. These rooms are often larger and acoustically treated to accommodate multiple musicians and capture natural room ambience.</p>
+    </li>
+    <li>
+      <h2>Collaboration Spaces</h2>
+      <p>Studios may have additional spaces for collaboration, meetings, and client sessions. These areas provide a comfortable environment for discussing projects, reviewing recordings, and brainstorming ideas.</p>
+    </li>
+  </ol>
+  </div>
+  
+
+
+
 </body>
 </html>
