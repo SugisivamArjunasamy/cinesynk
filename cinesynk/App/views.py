@@ -34,3 +34,5 @@ def directorRegister(request):
     return render(request, 'directorRegister.html')
 def studioRegister(request):
     return render(request,'studioRegister.html')
+def post(request):
+    return render(request, 'post.html')
