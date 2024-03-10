@@ -2,8 +2,9 @@ from django.shortcuts import render
 from .serializers import ProfessionalUserSerializer
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import LoginForm, SearchForm, RegistrationForm
-from .models import ProfessionalUser, MoviesWorked, Posts, Service
+from .forms import LoginForm, SearchForm, RegistrationForm, MessageForm
+from .models import ProfessionalUser, MoviesWorked, Posts, Service, Message
+from django.db.models import Q
 
 def home_view(request):
     user_token = request.session.get('user_token')
@@ -123,7 +124,7 @@ def vedioservices(request):
     user_token = request.session.get('user_token')
     profile_img = request.session.get('profile_img')
     if request.method == "POST":
-        print("POST METHOD")
+
         form = SearchForm(request.POST)
         
         if form.is_valid():
@@ -153,22 +154,20 @@ def register_view(request):
 
     if request.method == "POST":
         form = RegistrationForm(request.POST)
-        print("POST METHOD")
+
         
         if form.is_valid():
-            print('form is valid')
+
 
             email = form.cleaned_data.get('email')
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             confirmpassword = form.cleaned_data.get('confirmPassword')
-            print(email, username, password, confirmpassword, user_type)
-        else:
-            print('form is not valid')
+
         return render(request, 'register.html', {'user_type': user_type})
         
     else:
-        print(user_type)
+
         return render(request, 'register.html', {'user_type': user_type})
 
 
@@ -183,7 +182,46 @@ def post(request):
     return render(request, 'post.html', {"profile_img" : profile_img, "posts" : posts})
 
 def chat_view(request):
-    user_token = request.session.get('user_token')
+    user_email = request.session.get('user_token')
     profile_img = request.session.get('profile_img')
     
-    return render(request, "chat.html", {"profile_img" : profile_img})
+    if request.method == "POST":
+        form = MessageForm(request.POST)
+        
+        if form.is_valid():
+            message = form.cleaned_data.get('message')
+            recipient_email = form.cleaned_data.get('recipient_email')
+            
+            sender = ProfessionalUser.objects.get(email=user_email)
+            recipient = ProfessionalUser.objects.get(email=recipient_email)
+            new_message = Message(sender=sender, recipient=recipient, content=message)
+            new_message.save()
+            return HttpResponseRedirect(reverse('chat'))
+        
+    else:
+        messages = Message.objects.filter(Q(sender__email=user_email) | Q(recipient__email=user_email)).order_by('timestamp')
+        conversations = {}
+
+        for message in messages:
+
+            if message.sender.email != user_email and message.sender.email not in conversations:
+                conversations[message.sender.email] = {
+                    'name': message.sender.name,
+                    'profile_img': message.sender.profile_img,
+                    "user_type" : message.sender.user_type,
+                    'email' : message.sender.email,
+
+
+                }
+            
+            elif message.recipient.email != user_email and message.recipient.email not in conversations:
+                conversations[message.recipient.email] = {
+                    'name': message.recipient.name,
+                    'email' : message.recipient.email,
+                    'profile_img': message.recipient.profile_img,
+                    "user_type" : message.recipient.user_type 
+                }
+
+        unique_users = list(conversations.values())
+        recipient_email = unique_users[0]['email']
+        return render(request, "chat.html", {"profile_img" : profile_img, "messages" : messages, "current_user" :user_email, "conversations" : unique_users,  'recipient_email' : recipient_email})
