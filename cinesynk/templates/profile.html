@@ -204,40 +204,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-custom-color">
-        <div class="container-fluid">
-                <img src="{%static '/images/cinesynk.png'%}" alt="" style="width: 50px; height: 50px;">
-            <!-- <h1 class="navbar-brand bg" href="#">CineSynk</h1> -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Posts</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'studioProfile' %}">Studio Profiles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Podcasts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{%url 'services'%}">Services</a>
-                    </li>
-                </ul>
-    
-                
-                <div class="">
-                    <img onclick="redirect()" src="https://cdn-icons-png.flaticon.com/128/149/149071.png" alt="" style="width: 30px; height: 30px;">
-                </div>
-            </div>
-        </div>
-    </nav>
+    {% include 'navbar.html' %}
     <div class="image-container">
         <img src="https://imgs.search.brave.com/DVYz615KZd-EZZ0vO0dugnNr7LwtCUQsaiO9ceByKTs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9i/ZWF1dGlmdWwtbW91/bnRhaW5zLWxhbmRz/Y2FwZV8yMy0yMTUx/MTUxMDgxLmpwZz9z/aXplPTYyNiZleHQ9/anBn" class="img-fluid" alt="...">
         <div class="second-image">
