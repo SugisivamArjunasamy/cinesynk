@@ -3,7 +3,7 @@ from .serializers import ProfessionalUserSerializer
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import LoginForm
-from .models import ProfessionalUser
+from .models import ProfessionalUser, MoviesWorked, Posts
 
 def home_view(request):
     user_token = request.session.get('user_token')
@@ -27,8 +27,21 @@ def profile(request):
     except:
         serialized_user = {"user" : "John Doe"}
     
+    userData = serialized_user.data
+    try:
+        movies_worked = MoviesWorked.objects.filter(worked_by=professional_user).order_by('-added_time')
+    except MoviesWorked.DoesNotExist:
+        movies_worked = []
+    userData['movies_worked'] = movies_worked
+
+    try:
+        posts = Posts.objects.filter(posted_by=professional_user).order_by('-posted_time')
+    except Posts.DoesNotExist:
+        posts = []
+    userData['posts'] = posts
+    print(userData)
     if user_type == "professional":
-        return render(request, 'profile.html', {"user" : serialized_user.data,"profile_img" : profile_img})
+        return render(request, 'profile.html', {"user" : userData,"profile_img" : profile_img})
     
     elif user_type == "studio":
         return render(request, 'studioProfile.html', {"user" : serialized_user.data,"profile_img" : profile_img})

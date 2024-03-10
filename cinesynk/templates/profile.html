@@ -248,10 +248,10 @@
                     <div class="container-mine">
                         <div class="section">
                             {%for post in user.posts%}
-                            {%if post.type == "image"%}
+                            {%if post.post_type == "image"%}
                             <div class="post">
                                 <div>
-                                    <img src={{post.thumbnail}} alt="Profile Picture">
+                                    <img src={{post.source}} alt="Profile Picture">
                                     <div class="row-mine" style="margin-top: 7px;">
                                         <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
                                         <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
@@ -262,11 +262,11 @@
                                     </div>
                                 </div>
                             </div>
-                            {%elif post.type == "video"%}
+                            {%elif post.post_type == "video"%}
                             <div class="post">
                                 <div>
                                     <video class="post-video" loop autoplay muted>
-                                        <source src={{post.thumbnail}}>
+                                        <source src={{post.source}}>
                                     </video>
                                     <div class="row-mine" style="margin-top: 2px;">
                                         <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>

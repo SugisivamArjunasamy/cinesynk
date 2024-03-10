@@ -11,16 +11,25 @@ class ProfessionalUser(models.Model):
     location = models.CharField(max_length = 125)
     user_type = models.TextField(max_length=512, default='')
 
+    def __str__(self):
+        return self.name
+    
 class Posts(models.Model):
     posted_by = models.ForeignKey(ProfessionalUser, on_delete=models.CASCADE)
     source = models.TextField(max_length=512, default='')
     post_type = models.TextField(max_length=512, default='')
     description = models.TextField(max_length=512, default='')
-    posted_time = models.DateTimeField()
+    posted_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.posted_by} : {self.posted_time}"
 
 class MoviesWorked(models.Model):
     worked_by = models.ForeignKey(ProfessionalUser, on_delete=models.CASCADE)
     thumbnail = models.TextField(max_length=512, default='')
     title = models.CharField(max_length=125, default='')
     description = models.TextField(max_length=512, default='')
-    added_time = models.DateTimeField()
+    added_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.worked_by} : {self.added_time}"
