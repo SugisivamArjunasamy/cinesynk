@@ -203,34 +203,7 @@
   </script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-custom-color">
-    <div class="container-fluid">
-        <img onclick="redirect()" src="{%static '/images/cinesynk.png'%}" alt="" style="width: 50px; height: 50px;">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'post' %}">Posts</a>
-              </li>
-                
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'studioProfile' %}">Studio Profiles</a>
-              </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'services' %}">Services</a>
-                </li>
-            </ul>
-            <div class="">
-                <img onclick="redirect()" src="https://cdn-icons-png.flaticon.com/128/149/149071.png" alt="" style="width: 30px; height: 30px;">
-            </div>
-        </div>
-    </div>
-</nav>
+  {% include 'navbar.html' %}
 <div class="image-container">
     <img src="https://imgs.search.brave.com/-54g4jlgpY_idWGgQrHzgQpqn_rxFT3PyJVmgMIcTWg/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQz/ODUwNDcyOS9waG90/by9zaG90LW9mLXNv/dW5kLXJlY29yZGlu/Zy1zdHVkaW8tbWl4/ZXIuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPTN2Qmw1NFQ0/YmVWR0dLckxvSjE0/SHZUWEttakxZd0xr/UWlQZ2RsSklvczg9" class="img-fluid" alt="...">
     <div class="second-image">

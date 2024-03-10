@@ -7,13 +7,15 @@ from .models import ProfessionalUser
 
 def home_view(request):
     user_token = request.session.get('user_token')
+    profile_img = request.session.get('profile_img')
     if user_token:
-        return render(request, "home.html")
+        return render(request, "home.html", {"profile_img" : profile_img})
     else:
         return HttpResponseRedirect(reverse('login'))
 
 def profile(request):
     user_token = request.session.get('user_token')
+    profile_img = request.session.get('profile_img')
     
     if not user_token:
         return HttpResponseRedirect(reverse('login'))
@@ -23,15 +25,15 @@ def profile(request):
         serialized_user = ProfessionalUserSerializer(professional_user)
     except:
         serialized_user = {"user" : "John Doe"}
-        
-    return render(request, 'profile.html', {"user" : serialized_user.data})
+    return render(request, 'profile.html', {"user" : serialized_user.data,"profile_img" : profile_img})
 
 def studioProfile(request):
     user_token = request.session.get('user_token')
-    
+    profile_img = request.session.get('profile_img')
+
     if not user_token:
         return HttpResponseRedirect(reverse('login'))
-    return render(request, 'studioProfile.html')
+    return render(request, 'studioProfile.html', {"profile_img" : profile_img})
 
 def login(request):
     if request.method == "POST":
@@ -46,6 +48,7 @@ def login(request):
 
             if password== user.password:
                 request.session['user_token'] = user.email
+                request.session['profile_img'] = user.profile_img
                 return HttpResponseRedirect(reverse('home'))
             else:
                 return render(request, 'login.html', {"form": form, "error_message": "Invalid email or password."})
@@ -61,24 +64,27 @@ def guRegister(request):
 
 def services(request):
     user_token = request.session.get('user_token')
-    
+    profile_img = request.session.get('profile_img')
+
     if not user_token:
         return HttpResponseRedirect(reverse('login'))
-    return render(request,'services.html')
+    return render(request,'services.html', {"profile_img" : profile_img})
 
 def audioservices(request):
     user_token = request.session.get('user_token')
+    profile_img = request.session.get('profile_img')
     
     if not user_token:
         return HttpResponseRedirect(reverse('login'))
-    return render(request, 'audiose.html')
+    return render(request, 'audiose.html', {"profile_img" : profile_img})
 
 def vedioservices(request):
     user_token = request.session.get('user_token')
+    profile_img = request.session.get('profile_img')
     
     if not user_token:
         return HttpResponseRedirect(reverse('login'))
-    return render(request,'vediose.html')
+    return render(request,'vediose.html', {"profile_img" : profile_img})
 
 def registerop(request):
     return render(request,'registerop.html')
@@ -94,8 +100,9 @@ def studioRegister(request):
 
 def post(request):
     user_token = request.session.get('user_token')
+    profile_img = request.session.get('profile_img')
     
     if not user_token:
         return HttpResponseRedirect(reverse('login'))
     
-    return render(request, 'post.html')
+    return render(request, 'post.html', {"profile_img" : profile_img})
