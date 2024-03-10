@@ -32,4 +32,15 @@ class MoviesWorked(models.Model):
     added_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.worked_by} : {self.added_time}"
+        return f"{self.title} : {self.worked_by}"
+    
+class Service(models.Model):
+    title = models.CharField(max_length=125, default='')
+    posted_by = models.ForeignKey(ProfessionalUser, on_delete=models.CASCADE)
+    thumbnail = models.TextField(max_length=512, default='')
+    description = models.TextField(max_length=512, default='')
+    added_time = models.DateTimeField(auto_now_add=True)
+    service_type = models.TextField(max_length=512, default='')
+
+    def __str__(self):
+        return f"{self.title} by {self.posted_by}"

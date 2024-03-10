@@ -9,7 +9,7 @@
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
       <style>
          .bg-custom-color {
-         background-color: #000 !important; /* Change background color to black */
+         background-color: #000 !important;
          }
          .bg {
          color: #e11b46;
@@ -18,7 +18,7 @@
          margin: 0 10px;
          }
          nav a {
-         color: #FFFFFF !important; /* Change text color to white */
+         color: #FFFFFF !important;
          text-decoration: none;
          margin: 0 10px;
          }
@@ -34,7 +34,7 @@
          }
          .second-image {
          position: absolute;
-         top: 120px; /* Adjust as needed */
+         top: 120px;
          left: 20%;
          transform: translateX(-50%);
          z-index: 1;
@@ -104,7 +104,7 @@
          width: 100%;
          }
          .row-mine {
-         background-color: #212121; /* Dark background */
+         background-color: #212121;
          overflow: hidden;
          width: 100%;
          border-radius: 3px;
@@ -113,37 +113,37 @@
          align-items: center;
          }
          .like-button {
-         color: #fff; /* White text color */
+         color: #fff;
          text-decoration: none;
          padding: 10px 20px;
          transition: background-color 0.3s;
          border-radius: 3px;
          }
          .like-button:hover {
-         background-color: #424242; /* Darker background on hover */
+         background-color: #424242;
          }
          .like-button.active {
-         background-color: #4CAF50; /* Active button color */
+         background-color: #4CAF50;
          }
          .description-section {
-         background-color: #333; /* Dark background color */
-         color: #fff; /* White text color */
+         background-color: #333;
+         color: #fff;
          padding: 20px;
          text-align: center;
          }
          .button-mine {
-         color: #fff; /* White text color */
+         color: #fff;
          text-decoration: none;
          padding: 10px 20px;
          transition: background-color 0.3s;
          border-radius: 3px;
-         background-color: #3498db; /* Default background color */
-         border: none; /* Remove border */
+         background-color: #3498db;
+         border: none;
          cursor: pointer;
          display: inline-block;
          }
          .button-mine:hover {
-         background-color: #2980b9; /* Change background color on hover */
+         background-color: #2980b9;
          }
          #muteUnmuteIcon {
          margin-right: 5px;
@@ -153,31 +153,32 @@
          }
       </style>
       <script>
-         function toggleMute() {
-             var video = document.querySelector(".post-video");
-             var button = document.getElementById("muteUnmuteText");
-             
+         function toggleMute(button) {
+             var video = button.parentElement.previousElementSibling;
+             var icon = button.querySelector('i');
+         
              if (video.muted) {
                  video.muted = false;
-                 button.textContent = "Mute";
+                 button.querySelector('span').textContent = "Mute";
+                 icon.className = "fa fa-volume-off"; // Change class directly
+                 
              } else {
                  video.muted = true;
-                 button.textContent = "Unmute";
+                 button.querySelector('span').textContent = "Unmute";
+                 icon.className = "fa fa-volume-up"; // Change class directly
              }
          }
-         function toggleMute2() {
-             var video = document.querySelector(".post-video");
-             var button = document.getElementById("muteUnmuteText2");
-             
-             if (video.muted) {
-                 video.muted = false;
-                 button.textContent = "Mute";
-             } else {
-                 video.muted = true;
-                 button.textContent = "Unmute";
-             }
-         }
-      </script>
+         
+         document.addEventListener("DOMContentLoaded", function () {
+             var muteButtons = document.querySelectorAll(".mute-unmute-button");
+         
+             muteButtons.forEach(function (button) {
+                 button.addEventListener("click", function () {
+                     toggleMute(button);
+                 });
+             });
+         });
+     </script>
    </head>
    <body>
       {% include 'navbar.html' %}
@@ -248,10 +249,10 @@
                <div class="container-mine">
                   <div class="section">
                     {%for post in user.posts%}
-                    {%if post.type == "image"%}
+                    {%if post.post_type == "image"%}
                     <div class="post">
                         <div>
-                            <img src={{post.thumbnail}} alt="Profile Picture">
+                            <img src={{post.source}} alt="Profile Picture">
                             <div class="row-mine" style="margin-top: 7px;">
                                 <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
                                 <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
@@ -262,26 +263,26 @@
                             </div>
                         </div>
                     </div>
-                    {%elif post.type == "video"%}
+                    {%elif post.post_type == "video"%}
                     <div class="post">
                         <div>
-                            <video class="post-video" loop autoplay muted>
-                                <source src={{post.thumbnail}}>
-                            </video>
-                            <div class="row-mine" style="margin-top: 2px;">
-                                <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
-                                <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
-                                <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
-                                <button class="button-mine mute-unmute-button">
-                                <i class="fa fa-volume-up" style="margin-right: 2px;"></i>
-                                <span>Unmute</span>
-                                </button>
-                            </div>
-                            <div class="description-section">
-                                <p>{{post.description}}</p>
-                            </div>
+                           <video class="post-video" loop autoplay muted>
+                              <source src={{post.source}}>
+                           </video>
+                           <div class="row-mine" style="margin-top: 2px;">
+                              <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
+                              <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                              <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
+                              <button class="button-mine mute-unmute-button">
+                              <i class="fa fa-volume-up" style="margin-right: 2px;"></i>
+                              <span>Unmute</span>
+                              </button>
+                           </div>
+                           <div class="description-section">
+                              <p>{{post.description}}</p>
+                           </div>
                         </div>
-                    </div>
+                  </div>
                     {%endif%}
                     {%endfor%}
                 </div>
@@ -289,28 +290,18 @@
             </div>
             <div class="tab-pane fade" id="services-tab-pane" role="tabpanel" aria-labelledby="services-tab" tabindex="0">
                <div class="container">
-                  <div class="row">
+                  {% for service in user.services%}
                      <div class="col">
                         <div class="card" style="width: 18rem;">
-                           <img src="https://imgs.search.brave.com/gpQ4Uay9Kt2DOZqI4OUuJJ0JG5COsqpeOlOwaomfPys/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kaWdp/dGFsZmlsbW1ha2Vy/Lm5ldC93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNy8wOC92aWRl/b2dyYXBoeS1maWxt/bWFraW5nLWRpcmVj/dG9yLXByb2R1Y2Vy/LW9wZXJhdG9yLmpw/Zw" class="card-img-top" alt="...">
+                           <img src={{service.thumbnail}} class="card-img-top">
                            <div class="card-body">
-                              <h5 class="card-title">Video Production</h5>
-                              <p class="card-text">Transform your brand with our comprehensive video production services. We handle everything from scripting to editing, delivering captivating visuals that resonate with your audience. Elevate your message and stand out in the digital landscape with our expertise.</p>
-                              <a href="#" class="btn btn-primary">Send Request For Video Production</a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col">
-                        <div class="card" style="width: 18rem;">
-                           <img src="https://imgs.search.brave.com/PrPJi8nlY03n64UT9M1OVheSzJC-JBh4TgfYh1hdajs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/MzU0MDYyMDg1MzUt/MTQyOTgzOWNmZDEz/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4TVRSOGZH/MTFjMmxqSlRJd2Mz/UjFaR2x2ZkdWdWZE/QjhmREI4Zkh3dw.jpeg" class="card-img-top" alt="...">
-                           <div class="card-body">
-                              <h5 class="card-title">Audio Production</h5>
-                              <p class="card-text">Elevate your brand's audio presence with our comprehensive production services. From scriptwriting to recording and mastering, we ensure your message is conveyed effectively through captivating sound. Stand out with professional audio production tailored to your brand's needs.</p>
+                              <h5 class="card-title">{{service.title}}</h5>
+                              <p class="card-text">{{service.description}}</p>
                               <a href="#" class="btn btn-primary">Send Request For Audio Production</a>
                            </div>
                         </div>
                      </div>
-                  </div>
+                  {%endfor%}
                </div>
             </div>
          </div>

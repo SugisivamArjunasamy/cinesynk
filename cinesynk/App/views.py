@@ -3,7 +3,7 @@ from .serializers import ProfessionalUserSerializer
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import LoginForm
-from .models import ProfessionalUser, MoviesWorked, Posts
+from .models import ProfessionalUser, MoviesWorked, Posts, Service
 
 def home_view(request):
     user_token = request.session.get('user_token')
@@ -39,23 +39,22 @@ def profile(request):
     except Posts.DoesNotExist:
         posts = []
     userData['posts'] = posts
-    print(userData)
+
     if user_type == "professional":
         return render(request, 'profile.html', {"user" : userData,"profile_img" : profile_img})
     
     elif user_type == "studio":
-        return render(request, 'studioProfile.html', {"user" : serialized_user.data,"profile_img" : profile_img})
+        try:
+            provided_services = Service.objects.filter(posted_by=professional_user).order_by('-added_time')
+        
+        except Service.DoesNotExist:
+            provided_services = []
+        
+        userData['services'] = provided_services
+        return render(request, 'studioProfile.html', {"user" : userData,"profile_img" : profile_img})
     
     else:
         return HttpResponseRedirect(reverse('login'))
-
-def studioProfile(request):
-    user_token = request.session.get('user_token')
-    profile_img = request.session.get('profile_img')
-
-    if not user_token:
-        return HttpResponseRedirect(reverse('login'))
-    return render(request, 'studioProfile.html', {"profile_img" : profile_img})
 
 def login(request):
     if request.method == "POST":
