@@ -66,8 +66,9 @@
       <h1 style="text-align: center; width: fit-content; position: relative; left: 15%;">Audio Services</h1>
     </div>
     <div class="col">
-      <form class="form-control d-flex" role="search">
-        <input class="me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="form-control d-flex" role="search" method="post" action="{%url 'audioservices'%}">
+        {%csrf_token%}
+        <input class="me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput">
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
     </div>

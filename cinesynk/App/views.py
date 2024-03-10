@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .serializers import ProfessionalUserSerializer
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import LoginForm
+from .forms import LoginForm, SearchForm
 from .models import ProfessionalUser, MoviesWorked, Posts, Service
 
 def home_view(request):
@@ -97,31 +97,51 @@ def audioservices(request):
     user_token = request.session.get('user_token')
     profile_img = request.session.get('profile_img')
     
-    if not user_token:
-        return HttpResponseRedirect(reverse('login'))
+    if request.method == "POST":
     
-    try:
-        provided_services = Service.objects.all().filter(service_type="audio").order_by('-added_time')
+        form = SearchForm(request.POST)
         
-    except Service.DoesNotExist:
-            provided_services = []
+        if form.is_valid():
+            search_query = form.cleaned_data.get('searchInput')
+            provided_services = Service.objects.filter(service_type="audio", title__icontains=search_query, ).order_by('-added_time')
+            return render(request,'audiose.html', {"profile_img" : profile_img, "services" : provided_services})
+
+    else:
+        
+        if not user_token:
+            return HttpResponseRedirect(reverse('login'))
+        
+        try:
+            provided_services = Service.objects.all().filter(service_type="audio").order_by('-added_time')
             
-    return render(request,'audiose.html', {"profile_img" : profile_img, "services" : provided_services})
+        except Service.DoesNotExist:
+                provided_services = []
+                
+        return render(request,'audiose.html', {"profile_img" : profile_img, "services" : provided_services})
 
 def vedioservices(request):
     user_token = request.session.get('user_token')
     profile_img = request.session.get('profile_img')
-    
-    if not user_token:
-        return HttpResponseRedirect(reverse('login'))
-    
-    try:
-        provided_services = Service.objects.all().filter(service_type="video").order_by('-added_time')
+    if request.method == "POST":
+        print("POST METHOD")
+        form = SearchForm(request.POST)
         
-    except Service.DoesNotExist:
-            provided_services = []
+        if form.is_valid():
+            search_query = form.cleaned_data.get('searchInput')
+            provided_services = Service.objects.filter(service_type="video", title__icontains=search_query).order_by('-added_time')
+            return render(request,'vediose.html', {"profile_img" : profile_img, "services" : provided_services})
+
+    else:
+        if not user_token:
+            return HttpResponseRedirect(reverse('login'))
+        
+        try:
+            provided_services = Service.objects.all().filter(service_type="video").order_by('-added_time')
             
-    return render(request,'vediose.html', {"profile_img" : profile_img, "services" : provided_services})
+        except Service.DoesNotExist:
+                provided_services = []
+                
+        return render(request,'vediose.html', {"profile_img" : profile_img, "services" : provided_services})
 
 def registerop(request):
     return render(request,'registerop.html')
