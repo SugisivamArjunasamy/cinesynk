@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import home_view, profile, login ,guRegister, services, audioservices, vedioservices
-from .views import registerop ,register_view , post, chat_view
+from .views import registerop ,register_view , post, chat_view, enquire_view
 
 urlpatterns = [
     path('', home_view, name='home'),
@@ -13,5 +13,6 @@ urlpatterns = [
     path('registerop', registerop, name='registerop'),
     path('register', register_view, name='register'),
     path('post', post, name='post'),
-    path("chat", chat_view, name='chat')
+    path("chat", chat_view, name='chat'),
+    path("enquire", enquire_view, name='enquire')
 ]

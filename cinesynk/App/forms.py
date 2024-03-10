@@ -16,3 +16,8 @@ class RegistrationForm(forms.Form):
 class MessageForm(forms.Form):
     message = forms.CharField(label="message", required=True)
     recipient_email = forms.CharField(label='recipient_email', required=True)
+
+class EnquireForm(forms.Form):
+    title = forms.CharField(label="title", required=True)
+    service_email = forms.CharField(label='service_email', required=True)
+    description = forms.CharField(label='descriptionS', required=True)

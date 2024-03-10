@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .serializers import ProfessionalUserSerializer
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import LoginForm, SearchForm, RegistrationForm, MessageForm
+from .forms import LoginForm, SearchForm, RegistrationForm, MessageForm, EnquireForm
 from .models import ProfessionalUser, MoviesWorked, Posts, Service, Message
 from django.db.models import Q
 
@@ -225,3 +225,24 @@ def chat_view(request):
         unique_users = list(conversations.values())
         recipient_email = unique_users[0]['email']
         return render(request, "chat.html", {"profile_img" : profile_img, "messages" : messages, "current_user" :user_email, "conversations" : unique_users,  'recipient_email' : recipient_email})
+
+
+def enquire_view(request):
+    user_email = request.session.get('user_token')
+    profile_img = request.session.get('profile_img')
+
+    if request.method == "POST":
+        form = EnquireForm(request.POST)
+
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            service_email = form.cleaned_data.get('service_email')
+            description = form.cleaned_data.get('description')
+            
+            sender = ProfessionalUser.objects.get(email=user_email)
+            recipient = ProfessionalUser.objects.get(email=service_email)
+            message = f"Hello {recipient.name}, I am interested in your {title} Service. Can you send me the further details"
+            new_message = Message(sender=sender, recipient=recipient, content=message)
+            new_message.save()
+        
+    return HttpResponseRedirect(reverse('chat'))
