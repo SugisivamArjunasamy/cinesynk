@@ -128,4 +128,5 @@ def post(request):
     if not user_token:
         return HttpResponseRedirect(reverse('login'))
     
-    return render(request, 'post.html', {"profile_img" : profile_img})
+    posts = posts = Posts.objects.order_by('-posted_time')
+    return render(request, 'post.html', {"profile_img" : profile_img, "posts" : posts})
