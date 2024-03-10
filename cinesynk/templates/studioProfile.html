@@ -1,419 +1,320 @@
 {%load static%}
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CineSynk</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <style>
-        .bg-custom-color {
-            background-color: #000 !important; /* Change background color to black */
-        }
-
-        .bg {
-            color: #e11b46;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        nav a {
-            color: #FFFFFF !important; /* Change text color to white */
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .image-container {
-            position: relative;
-        }
-
-        .image-container img {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 35vh;
-            object-fit: cover;
-        }
-
-        .second-image {
-            position: absolute;
-            top: 120px; /* Adjust as needed */
-            left: 20%;
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-
-        .flip-card {
-  background-color: transparent;
-  width: 300px;
-  height: 400px;
-  perspective: 1000px;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-card-front {
-  background-color: #bbb;
-  color: black;
-}
-
-.flip-card-back {
-  background-color: #141313b6;
-  color: white;
-  transform: rotateY(180deg);
-}
-
-.container-mine {
-            max-width: 1280px;
-            margin: 10px;
-            padding: 20px;
-
-        }
-        footer {
-            background-color: #111;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        .post {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #444;
-            border-radius: 5px;
-        }
-        .post h3, .post p {
-            color: #fff;
-        }
-        .post img {
-            width: 100%;
-            border-radius: 5px;
-        }
-        .post-video{
-          position: relative;
-          width: 100%;
-        }
-
-        .row-mine {
-            background-color: #212121; /* Dark background */
-            overflow: hidden;
-            width: 100%;
-            border-radius: 3px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .like-button {
-            color: #fff; /* White text color */
-            text-decoration: none;
-            padding: 10px 20px;
-            transition: background-color 0.3s;
-            border-radius: 3px;
-        }
-
-        .like-button:hover {
-            background-color: #424242; /* Darker background on hover */
-        }
-
-        .like-button.active {
-            background-color: #4CAF50; /* Active button color */
-        }
-        
-        .description-section {
-            background-color: #333; /* Dark background color */
-            color: #fff; /* White text color */
-            padding: 20px;
-            text-align: center;
-        }
-        .button-mine {
-          color: #fff; /* White text color */
-          text-decoration: none;
-          padding: 10px 20px;
-          transition: background-color 0.3s;
-          border-radius: 3px;
-          background-color: #3498db; /* Default background color */
-          border: none; /* Remove border */
-          cursor: pointer;
-          display: inline-block;
-        }
-
-        .button-mine:hover {
-          background-color: #2980b9; /* Change background color on hover */
-        }
-        #muteUnmuteIcon {
-          margin-right: 5px;
-        }
-
-        #muteUnmuteText {
-          margin-left: 5px;
-        }
-
-
-
-    </style>
-    <script>
-      function toggleMute() {
-          var video = document.querySelector(".post-video");
-          var button = document.getElementById("muteUnmuteText");
-          
-          if (video.muted) {
-              video.muted = false;
-              button.textContent = "Mute";
-          } else {
-              video.muted = true;
-              button.textContent = "Unmute";
-          }
-      }
-      function toggleMute2() {
-          var video = document.querySelector(".post-video");
-          var button = document.getElementById("muteUnmuteText2");
-          
-          if (video.muted) {
-              video.muted = false;
-              button.textContent = "Mute";
-          } else {
-              video.muted = true;
-              button.textContent = "Unmute";
-          }
-      }
-  </script>
-</head>
-<body>
-  {% include 'navbar.html' %}
-<div class="image-container">
-    <img src="https://imgs.search.brave.com/-54g4jlgpY_idWGgQrHzgQpqn_rxFT3PyJVmgMIcTWg/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQz/ODUwNDcyOS9waG90/by9zaG90LW9mLXNv/dW5kLXJlY29yZGlu/Zy1zdHVkaW8tbWl4/ZXIuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPTN2Qmw1NFQ0/YmVWR0dLckxvSjE0/SHZUWEttakxZd0xr/UWlQZ2RsSklvczg9" class="img-fluid" alt="...">
-    <div class="second-image">
-        <img src="https://imgs.search.brave.com/rajG7tzwEVUoEEcZBlQfFjyboU3kz32HW7YjLqcoPTI/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/NTIxNjI4NjQtOTg3/YWM1MWQxMTc3P3E9/ODAmdz0xMDAwJmF1/dG89Zm9ybWF0JmZp/dD1jcm9wJml4bGli/PXJiLTQuMC4zJml4/aWQ9TTN3eE1qQTNm/REI4TUh4amIyeHNa/V04wYVc5dUxYQmha/MlY4TVROOE56WXdP/REkzTnpSOGZHVnVm/REI4Zkh4OGZBPT0.jpeg" alt="..." style="border-radius:50%;">
-    </div>
-</div>
-<div>
-    <div class="container">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>CineSynk</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+      <style>
+         .bg-custom-color {
+         background-color: #000 !important; /* Change background color to black */
+         }
+         .bg {
+         color: #e11b46;
+         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+         text-decoration: none;
+         margin: 0 10px;
+         }
+         nav a {
+         color: #FFFFFF !important; /* Change text color to white */
+         text-decoration: none;
+         margin: 0 10px;
+         }
+         .image-container {
+         position: relative;
+         }
+         .image-container img {
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 35vh;
+         object-fit: cover;
+         }
+         .second-image {
+         position: absolute;
+         top: 120px; /* Adjust as needed */
+         left: 20%;
+         transform: translateX(-50%);
+         z-index: 1;
+         }
+         .flip-card {
+         background-color: transparent;
+         width: 300px;
+         height: 400px;
+         perspective: 1000px;
+         }
+         .flip-card-inner {
+         position: relative;
+         width: 100%;
+         height: 100%;
+         text-align: center;
+         transition: transform 0.6s;
+         transform-style: preserve-3d;
+         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+         }
+         .flip-card:hover .flip-card-inner {
+         transform: rotateY(180deg);
+         }
+         .flip-card-front, .flip-card-back {
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         -webkit-backface-visibility: hidden;
+         backface-visibility: hidden;
+         }
+         .flip-card-front {
+         background-color: #bbb;
+         color: black;
+         }
+         .flip-card-back {
+         background-color: #141313b6;
+         color: white;
+         transform: rotateY(180deg);
+         }
+         .container-mine {
+         max-width: 1280px;
+         margin: 10px;
+         padding: 20px;
+         }
+         footer {
+         background-color: #111;
+         padding: 10px;
+         text-align: center;
+         position: fixed;
+         bottom: 0;
+         width: 100%;
+         }
+         .post {
+         margin-bottom: 20px;
+         padding: 10px;
+         background-color: #444;
+         border-radius: 5px;
+         }
+         .post h3, .post p {
+         color: #fff;
+         }
+         .post img {
+         width: 100%;
+         border-radius: 5px;
+         }
+         .post-video{
+         position: relative;
+         width: 100%;
+         }
+         .row-mine {
+         background-color: #212121; /* Dark background */
+         overflow: hidden;
+         width: 100%;
+         border-radius: 3px;
+         display: flex;
+         justify-content: space-around;
+         align-items: center;
+         }
+         .like-button {
+         color: #fff; /* White text color */
+         text-decoration: none;
+         padding: 10px 20px;
+         transition: background-color 0.3s;
+         border-radius: 3px;
+         }
+         .like-button:hover {
+         background-color: #424242; /* Darker background on hover */
+         }
+         .like-button.active {
+         background-color: #4CAF50; /* Active button color */
+         }
+         .description-section {
+         background-color: #333; /* Dark background color */
+         color: #fff; /* White text color */
+         padding: 20px;
+         text-align: center;
+         }
+         .button-mine {
+         color: #fff; /* White text color */
+         text-decoration: none;
+         padding: 10px 20px;
+         transition: background-color 0.3s;
+         border-radius: 3px;
+         background-color: #3498db; /* Default background color */
+         border: none; /* Remove border */
+         cursor: pointer;
+         display: inline-block;
+         }
+         .button-mine:hover {
+         background-color: #2980b9; /* Change background color on hover */
+         }
+         #muteUnmuteIcon {
+         margin-right: 5px;
+         }
+         #muteUnmuteText {
+         margin-left: 5px;
+         }
+      </style>
+      <script>
+         function toggleMute() {
+             var video = document.querySelector(".post-video");
+             var button = document.getElementById("muteUnmuteText");
+             
+             if (video.muted) {
+                 video.muted = false;
+                 button.textContent = "Mute";
+             } else {
+                 video.muted = true;
+                 button.textContent = "Unmute";
+             }
+         }
+         function toggleMute2() {
+             var video = document.querySelector(".post-video");
+             var button = document.getElementById("muteUnmuteText2");
+             
+             if (video.muted) {
+                 video.muted = false;
+                 button.textContent = "Mute";
+             } else {
+                 video.muted = true;
+                 button.textContent = "Unmute";
+             }
+         }
+      </script>
+   </head>
+   <body>
+      {% include 'navbar.html' %}
+      <div class="image-container">
+         <img src="https://imgs.search.brave.com/-54g4jlgpY_idWGgQrHzgQpqn_rxFT3PyJVmgMIcTWg/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQz/ODUwNDcyOS9waG90/by9zaG90LW9mLXNv/dW5kLXJlY29yZGlu/Zy1zdHVkaW8tbWl4/ZXIuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPTN2Qmw1NFQ0/YmVWR0dLckxvSjE0/SHZUWEttakxZd0xr/UWlQZ2RsSklvczg9" class="img-fluid" alt="...">
+         <div class="second-image">
+            <img src={{user.profile_img}} alt="" style="border-radius:50%;">
+         </div>
+      </div>
+      <div>
+      <div class="container">
       <div class="row" style="padding-left: 330px; color: #FFFFFF;">
-        <h1>Mei</h1>
-        <div>
+         <h1>{{user.name}}</h1>
+         <div>
             <a>
-                <i class="fa fa-suitcase" style="font-size: 15px; color: #FFFFFF; margin-right: 10px;"></i>
-                11 years 
+            <i class="fa fa-suitcase" style="font-size: 15px; color: #FFFFFF; margin-right: 10px;"></i>
+            {{user.experience}}
             </a>
-        </div>
-        <div>
+         </div>
+         <div>
             <a>
-                <i class="fas fa-map-marker-alt" style="font-size: 15px; color: #FFFFFF; margin-right: 13px;"></i>
-                Chennai 
+            <i class="fas fa-map-marker-alt" style="font-size: 15px; color: #FFFFFF; margin-right: 13px;"></i>
+            {{user.location}} 
             </a>
-        </div>
-</div>
-<div class="row" style="margin-top: 80px;font-size:x-large; padding: 10px;">
-            <a>About us : </a>
-        </div>
-        <div class="row" style="padding: 10px;">
-            <a>"Welcome to our state-of-the-art video production studio, where creativity meets technology. Our fully equipped facility offers everything you need to bring your vision to life, from pre-production planning to post-production editing. With professional-grade cameras, lighting, sound equipment, and editing suites, we provide the tools and expertise to produce stunning visual content for any project."
-
-                "Step into our dynamic video production studio, where innovation and imagination thrive. Our versatile space is designed to accommodate a variety of filming needs, whether it's a corporate video, commercial, music video, or film production. With customizable sets, green screens, and high-quality equipment, we ensure that every frame captures the essence of your story with precision and flair."
-                
-                "Discover the possibilities in our cutting-edge video production studio, where creativity knows no bounds. From concept development to final delivery, our team of experienced professionals works tirelessly to bring your ideas to fruition. With top-of-the-line cameras, sound recording equipment, and editing software, we deliver captivating visuals and immersive experiences that resonate with audiences across all platforms."
-                
-                "Experience the magic of filmmaking in our fully equipped video production studio. Nestled in the heart of [Location], our spacious facility boasts industry-standard equipment and amenities to support projects of any scale. Whether you're shooting a short film, documentary, or promotional video, our dedicated team provides expert guidance and technical support every step of the way, ensuring a seamless production process from start to finish."
-                
-                "Welcome to our innovative video production studio, where imagination takes flight. Designed for creators by creators, our studio offers a collaborative environment where ideas flourish and visions come to life. With a range of production services available, including scriptwriting, casting, filming, and editing, we provide comprehensive solutions tailored to your unique needs. Join us in shaping the future of storytelling through the power of video."
-                
-                These descriptions can be adjusted and expanded upon based on the specific features, services, and atmosphere of your video production studio.</a>
-</div>
-
-<div style="margin-left: 17vh;"> 
-  <ul class="nav nav-pills" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Movies Worked</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Posts</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="services-tab" data-bs-toggle="tab" data-bs-target="#services-tab-pane" type="button" role="tab" aria-controls="services-tab-pane" aria-selected="false">Services</button>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent" style="padding-top: 10px;">
-      <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0" style="border-color: #FFFFFF;">
-          <div class="container">
-              <div class="row">
-                  <div class="col">
-                      <div class="flip-card">
-                          <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                              <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
-                            </div>
-                            <div class="flip-card-back">
-                              <h1>Master</h1> 
-                              <p>Master one of the best tamil movie</p> 
-                              <p>We love that Movie</p>
-                            </div>
-                          </div>
-                        </div>
-                  </div>
-                  <div class="col">
-                      <div class="flip-card">
-                          <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                              <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
-                            </div>
-                            <div class="flip-card-back">
-                              <h1>Master</h1> 
-                              <p>Master one of the best tamil movie</p> 
-                              <p>We love that Movie</p>
-                            </div>
-                          </div>
-                        </div>
-                  </div>
-                  <div class="col">
-                      <div class="flip-card">
-                          <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                              <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
-                            </div>
-                            <div class="flip-card-back">
-                              <h1>Master</h1> 
-                              <p>Master one of the best tamil movie</p> 
-                              <p>We love that Movie</p>
-                            </div>
-                          </div>
-                        </div>
-                  </div>
-                  <div class="col">
-                      <div class="flip-card">
-                          <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                              <img src="https://imgs.search.brave.com/TvD5yuAUbyT-MmFzNYq-F8qk9N6EyCcOxA_RP53Ma8Q/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5ncWluZGlhLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/MS8xMC9NYXN0ZXIt/NDQweDU3MC5qcGc" alt="Avatar" style="width:300px;height:400px;">
-                            </div>
-                            <div class="flip-card-back">
-                              <h1>Master</h1> 
-                              <p>Master one of the best tamil movie</p> 
-                              <p>We love that Movie</p>
-                            </div>
-                          </div>
-                        </div>
-                  </div>
-                  
-              </div>
-          </div>
-            
+         </div>
       </div>
-      <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-        <div class="container-mine">
-          <div class="section">
-              <div class="post">
-                  <div>
-                      <img src="https://images6.alphacoders.com/134/1340814.jpeg" alt="Profile Picture">
-                      <div class="row-mine" style="margin-top: 7px;">
-                          <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
-                          <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
-                          <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
-                        </div>
-                        <div class="description-section">
-                          <p>This is a description of your website or application. You can provide information about its purpose, features, or anything else you'd like to convey to your users.</p>
-                        </div>
-                      
-                  </div>
-              </div>
-              <div class="post">
-                <div>
-                  <video class="post-video" loop autoplay muted>
-                      <source src="{%static 'videos/movie.mp4'%}">
-                  </video>
-                  <div class="row-mine" style="margin-top: 2px;">
-                      <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
-                      <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
-                      <button class="button-mine" id="muteUnmuteButton" onclick="toggleMute()">
-                          <i id="muteUnmuteIcon" class="fa fa-volume-up" style="margin-right: 2px;"></i>
-                          <span id="muteUnmuteText">UnMute</span>
-                      </button>
-                      <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
-                  </div>
-                  <div class="description-section">
-                      <p>This is a description of your website or application. You can provide information about its purpose, features, or anything else you'd like to convey to your users.</p>
-                  </div>
-              </div>
-              <div class="post">
-                  <div>
-                      <video class="post-video" loop autoplay  muted>
-                          <source src="{%static 'videos/video.mp4'%}">
-                      </video>
-                      <div class="row-mine" style="margin-top: 2px;">
-                          <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
-                          <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
-                          <button class="button-mine" id="muteUnmuteButton2" onclick="toggleMute2()">
-                              <i id="muteUnmuteIcon2" class="fa fa-volume-up" style="margin-right: 2px;"></i>
-                              <span id="muteUnmuteText2">UnMute</span>
-                          </button>
-                          <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
-                      </div>
-                      <div class="description-section">
-                          <p>This is a description of your website or application. You can provide information about its purpose, features, or anything else you'd like to convey to your users.</p>
-                      </div>
-                  </div>
-              </div>
-              
-              </div>
-              
-          </div>
+      <div class="row" style="margin-top: 80px;font-size:x-large; padding: 10px;">
+         <a>About us : </a>
       </div>
+      <div class="row" style="padding: 10px;">
+         <a>{{user.about}}</a>
       </div>
-
-      <div class="tab-pane fade" id="services-tab-pane" role="tabpanel" aria-labelledby="services-tab" tabindex="0">
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <div class="card" style="width: 18rem;">
-                <img src="https://imgs.search.brave.com/gpQ4Uay9Kt2DOZqI4OUuJJ0JG5COsqpeOlOwaomfPys/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kaWdp/dGFsZmlsbW1ha2Vy/Lm5ldC93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNy8wOC92aWRl/b2dyYXBoeS1maWxt/bWFraW5nLWRpcmVj/dG9yLXByb2R1Y2Vy/LW9wZXJhdG9yLmpw/Zw" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Video Production</h5>
-                  <p class="card-text">Transform your brand with our comprehensive video production services. We handle everything from scripting to editing, delivering captivating visuals that resonate with your audience. Elevate your message and stand out in the digital landscape with our expertise.</p>
-                  <a href="#" class="btn btn-primary">Send Request For Video Production</a>
+      <div style="margin-left: 17vh;">
+         <ul class="nav nav-pills" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+               <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Movies Worked</button>
+            </li>
+            <li class="nav-item" role="presentation">
+               <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Posts</button>
+            </li>
+            <li class="nav-item" role="presentation">
+               <button class="nav-link" id="services-tab" data-bs-toggle="tab" data-bs-target="#services-tab-pane" type="button" role="tab" aria-controls="services-tab-pane" aria-selected="false">Services</button>
+            </li>
+         </ul>
+         <div class="tab-content" id="myTabContent" style="padding-top: 10px;">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0" style="border-color: #FFFFFF;">
+               <div class="container">
+                  <div class="row">
+                    {%for movie in user.movies_worked%}
+                    <div class="col">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src={{movie.thumbnail}} alt="Avatar" style="width:300px;height:400px;">
+                                </div>
+                                <div class="flip-card-back">
+                                    <h1>{{movie.title}}</h1>
+                                    <p>{{movie.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
                 </div>
-              </div>
+               </div>
             </div>
-            <div class="col">
-              <div class="card" style="width: 18rem;">
-                <img src="https://imgs.search.brave.com/PrPJi8nlY03n64UT9M1OVheSzJC-JBh4TgfYh1hdajs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/MzU0MDYyMDg1MzUt/MTQyOTgzOWNmZDEz/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4TVRSOGZH/MTFjMmxqSlRJd2Mz/UjFaR2x2ZkdWdWZE/QjhmREI4Zkh3dw.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Audio Production</h5>
-                  <p class="card-text">Elevate your brand's audio presence with our comprehensive production services. From scriptwriting to recording and mastering, we ensure your message is conveyed effectively through captivating sound. Stand out with professional audio production tailored to your brand's needs.</p>
-                  <a href="#" class="btn btn-primary">Send Request For Audio Production</a>
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+               <div class="container-mine">
+                  <div class="section">
+                    {%for post in user.posts%}
+                    {%if post.type == "image"%}
+                    <div class="post">
+                        <div>
+                            <img src={{post.thumbnail}} alt="Profile Picture">
+                            <div class="row-mine" style="margin-top: 7px;">
+                                <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
+                                <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                                <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
+                            </div>
+                            <div class="description-section">
+                                <p>{{post.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {%elif post.type == "video"%}
+                    <div class="post">
+                        <div>
+                            <video class="post-video" loop autoplay muted>
+                                <source src={{post.thumbnail}}>
+                            </video>
+                            <div class="row-mine" style="margin-top: 2px;">
+                                <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
+                                <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                                <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
+                                <button class="button-mine mute-unmute-button">
+                                <i class="fa fa-volume-up" style="margin-right: 2px;"></i>
+                                <span>Unmute</span>
+                                </button>
+                            </div>
+                            <div class="description-section">
+                                <p>{{post.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
                 </div>
-              </div>
+               </div>
             </div>
-          </div>
-          
-        </div>
-        
-    </div>
-  </div>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+            <div class="tab-pane fade" id="services-tab-pane" role="tabpanel" aria-labelledby="services-tab" tabindex="0">
+               <div class="container">
+                  <div class="row">
+                     <div class="col">
+                        <div class="card" style="width: 18rem;">
+                           <img src="https://imgs.search.brave.com/gpQ4Uay9Kt2DOZqI4OUuJJ0JG5COsqpeOlOwaomfPys/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9kaWdp/dGFsZmlsbW1ha2Vy/Lm5ldC93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNy8wOC92aWRl/b2dyYXBoeS1maWxt/bWFraW5nLWRpcmVj/dG9yLXByb2R1Y2Vy/LW9wZXJhdG9yLmpw/Zw" class="card-img-top" alt="...">
+                           <div class="card-body">
+                              <h5 class="card-title">Video Production</h5>
+                              <p class="card-text">Transform your brand with our comprehensive video production services. We handle everything from scripting to editing, delivering captivating visuals that resonate with your audience. Elevate your message and stand out in the digital landscape with our expertise.</p>
+                              <a href="#" class="btn btn-primary">Send Request For Video Production</a>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col">
+                        <div class="card" style="width: 18rem;">
+                           <img src="https://imgs.search.brave.com/PrPJi8nlY03n64UT9M1OVheSzJC-JBh4TgfYh1hdajs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE1/MzU0MDYyMDg1MzUt/MTQyOTgzOWNmZDEz/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4TVRSOGZH/MTFjMmxqSlRJd2Mz/UjFaR2x2ZkdWdWZE/QjhmREI4Zkh3dw.jpeg" class="card-img-top" alt="...">
+                           <div class="card-body">
+                              <h5 class="card-title">Audio Production</h5>
+                              <p class="card-text">Elevate your brand's audio presence with our comprehensive production services. From scriptwriting to recording and mastering, we ensure your message is conveyed effectively through captivating sound. Stand out with professional audio production tailored to your brand's needs.</p>
+                              <a href="#" class="btn btn-primary">Send Request For Audio Production</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   </body>
 </html>

@@ -1,121 +1,107 @@
 {%load static%}
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CineSynk</title>
-    <style>
-        .bg-custom-color {
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CineSynk</title>
+        <style>
+            .bg-custom-color {
             background-color: #000 !important; /* Change background color to black */
-        }
-
-        .bg {
+            }
+            .bg {
             color: #e11b46;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-decoration: none;
             margin: 0 10px;
-        }
-
-        nav a {
+            }
+            nav a {
             color: #FFFFFF !important; /* Change text color to white */
             text-decoration: none;
             margin: 0 10px;
-        }
-
-        .image-container {
+            }
+            .image-container {
             position: relative;
-        }
-
-        .image-container img {
+            }
+            .image-container img {
             top: 0;
             left: 0;
             width: 100%;
             height: 35vh;
             object-fit: cover;
-        }
-
-        .second-image {
+            }
+            .second-image {
             position: absolute;
             top: 120px; /* Adjust as needed */
             left: 20%;
             transform: translateX(-50%);
             z-index: 1;
-        }
-
-        .flip-card {
-  background-color: transparent;
-  width: 300px;
-  height: 400px;
-  perspective: 1000px;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-card-front {
-  background-color: #bbb;
-  color: black;
-}
-
-.flip-card-back {
-  background-color: #141313b6;
-  color: white;
-  transform: rotateY(180deg);
-}
-
-.container-mine {
+            }
+            .flip-card {
+            background-color: transparent;
+            width: 300px;
+            height: 400px;
+            perspective: 1000px;
+            }
+            .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            }
+            .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+            }
+            .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            }
+            .flip-card-front {
+            background-color: #bbb;
+            color: black;
+            }
+            .flip-card-back {
+            background-color: #141313b6;
+            color: white;
+            transform: rotateY(180deg);
+            }
+            .container-mine {
             max-width: 1280px;
             margin: 10px;
             padding: 20px;
-
-        }
-        footer {
+            }
+            footer {
             background-color: #111;
             padding: 10px;
             text-align: center;
             position: fixed;
             bottom: 0;
             width: 100%;
-        }
-        .post {
+            }
+            .post {
             margin-bottom: 20px;
             padding: 10px;
             background-color: #444;
             border-radius: 5px;
-        }
-        .post h3, .post p {
+            }
+            .post h3, .post p {
             color: #fff;
-        }
-        .post img {
+            }
+            .post img {
             width: 100%;
             border-radius: 5px;
-        }
-        .post-video{
-          position: relative;
-          width: 100%;
-        }
-
-        .row-mine {
+            }
+            .post-video{
+            position: relative;
+            width: 100%;
+            }
+            .row-mine {
             background-color: #212121; /* Dark background */
             overflow: hidden;
             width: 100%;
@@ -123,205 +109,186 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-        }
-
-        .like-button {
+            }
+            .like-button {
             color: #fff; /* White text color */
             text-decoration: none;
             padding: 10px 20px;
             transition: background-color 0.3s;
             border-radius: 3px;
-        }
-
-        .like-button:hover {
+            }
+            .like-button:hover {
             background-color: #424242; /* Darker background on hover */
-        }
-
-        .like-button.active {
+            }
+            .like-button.active {
             background-color: #4CAF50; /* Active button color */
-        }
-        
-        .description-section {
+            }
+            .description-section {
             background-color: #333; /* Dark background color */
             color: #fff; /* White text color */
             padding: 20px;
             text-align: center;
-        }
-        .button-mine {
-          color: #fff; /* White text color */
-          text-decoration: none;
-          padding: 10px 20px;
-          transition: background-color 0.3s;
-          border-radius: 3px;
-          background-color: #3498db; /* Default background color */
-          border: none; /* Remove border */
-          cursor: pointer;
-          display: inline-block;
-        }
-
-        .button-mine:hover {
-          background-color: #2980b9; /* Change background color on hover */
-        }
-        #muteUnmuteIcon {
-          margin-right: 5px;
-        }
-
-        #muteUnmuteText {
-          margin-left: 5px;
-        }
-
-
-
-    </style>
-    <script>
-        function toggleMute(button) {
-            var video = button.parentElement.previousElementSibling;
-            var icon = button.querySelector('i');
-        
-            if (video.muted) {
-                video.muted = false;
-                button.querySelector('span').textContent = "Mute";
-                icon.className = "fa fa-volume-off"; // Change class directly
-                
-            } else {
-                video.muted = true;
-                button.querySelector('span').textContent = "Unmute";
-                icon.className = "fa fa-volume-up"; // Change class directly
             }
-        }
-        
-        document.addEventListener("DOMContentLoaded", function () {
-            var muteButtons = document.querySelectorAll(".mute-unmute-button");
-        
-            muteButtons.forEach(function (button) {
-                button.addEventListener("click", function () {
-                    toggleMute(button);
+            .button-mine {
+            color: #fff; /* White text color */
+            text-decoration: none;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+            border-radius: 3px;
+            background-color: #3498db; /* Default background color */
+            border: none; /* Remove border */
+            cursor: pointer;
+            display: inline-block;
+            }
+            .button-mine:hover {
+            background-color: #2980b9; /* Change background color on hover */
+            }
+            #muteUnmuteIcon {
+            margin-right: 5px;
+            }
+            #muteUnmuteText {
+            margin-left: 5px;
+            }
+        </style>
+        <script>
+            function toggleMute(button) {
+                var video = button.parentElement.previousElementSibling;
+                var icon = button.querySelector('i');
+            
+                if (video.muted) {
+                    video.muted = false;
+                    button.querySelector('span').textContent = "Mute";
+                    icon.className = "fa fa-volume-off"; // Change class directly
+                    
+                } else {
+                    video.muted = true;
+                    button.querySelector('span').textContent = "Unmute";
+                    icon.className = "fa fa-volume-up"; // Change class directly
+                }
+            }
+            
+            document.addEventListener("DOMContentLoaded", function () {
+                var muteButtons = document.querySelectorAll(".mute-unmute-button");
+            
+                muteButtons.forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        toggleMute(button);
+                    });
                 });
             });
-        });
-    </script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  </head>
-  <body>
-    {% include 'navbar.html' %}
-    <div class="image-container">
-        <img src="https://imgs.search.brave.com/DVYz615KZd-EZZ0vO0dugnNr7LwtCUQsaiO9ceByKTs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9i/ZWF1dGlmdWwtbW91/bnRhaW5zLWxhbmRz/Y2FwZV8yMy0yMTUx/MTUxMDgxLmpwZz9z/aXplPTYyNiZleHQ9/anBn" class="img-fluid" alt="...">
-        <div class="second-image">
-            <img src={{user.profile_img}} alt="..." style="border-radius:50%;">
+        </script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    </head>
+    <body>
+        {% include 'navbar.html' %}
+        <div class="image-container">
+            <img src="https://imgs.search.brave.com/DVYz615KZd-EZZ0vO0dugnNr7LwtCUQsaiO9ceByKTs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9i/ZWF1dGlmdWwtbW91/bnRhaW5zLWxhbmRz/Y2FwZV8yMy0yMTUx/MTUxMDgxLmpwZz9z/aXplPTYyNiZleHQ9/anBn" class="img-fluid" alt="...">
+            <div class="second-image">
+                <img src={{user.profile_img}} alt="..." style="border-radius:50%;">
+            </div>
         </div>
-    </div>
-    <div>
-        <div class="container">
-            <div class="row" style="padding-left: 330px; color: #FFFFFF;">
-                <h1>{{user.name}}</h1>
-                <div>
-                    <a>
+        <div>
+            <div class="container">
+                <div class="row" style="padding-left: 330px; color: #FFFFFF;">
+                    <h1>{{user.name}}</h1>
+                    <div>
+                        <a>
                         <i class="fa fa-suitcase" style="font-size: 15px; color: #FFFFFF; margin-right: 10px;"></i>
                         {{user.experience}} 
-                    </a>
-                </div>
-                <div>
-                    <a>
+                        </a>
+                    </div>
+                    <div>
+                        <a>
                         <i class="fas fa-map-marker-alt" style="font-size: 15px; color: #FFFFFF; margin-right: 13px;"></i>
                         {{user.location}} 
-                    </a>
-                </div>
-            </div>
-            
-            
-            <div class="row" style="margin-top: 60px;font-size:x-large; padding: 10px;">
-                <a> About Me : </a>
-            </div>
-            <div class="row" style="padding: 10px;">
-                <a>{{user.about}}</a>
-            </div>
-              
-              
-          </div>
-    </div>
-
-    <div style="margin-left: 17vh;"> 
-        <ul class="nav nav-pills" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Movies Worked</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Posts</button>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent" style="padding-top: 10px;">
-            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0" style="border-color: #FFFFFF;">
-                <div class="container">
-                    <div class="row">
-                        {%for movie in user.movies_worked%}
-                        <div class="col">
-                          <div class="flip-card">
-                              <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                  <img src={{movie.thumbnail}} alt="Avatar" style="width:300px;height:400px;">
-                              </div>
-                              <div class="flip-card-back">
-                                  <h1>{{movie.title}}</h1> 
-                                  <p>{{movie.description}}</p> 
-                              </div>
-                              </div>
-                          </div>
-                        </div>
-                        {%endfor%}
+                        </a>
                     </div>
                 </div>
-                  
+                <div class="row" style="margin-top: 60px;font-size:x-large; padding: 10px;">
+                    <a> About Me : </a>
+                </div>
+                <div class="row" style="padding: 10px;">
+                    <a>{{user.about}}</a>
+                </div>
             </div>
-            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-              <div class="container-mine">
-                <div class="section">
-                    {%for post in user.posts%}
-                    
-                    {%if post.type == "image"%}
-                    <div class="post">
-                        <div>
-                            <img src={{post.thumbnail}} alt="Profile Picture">
-                            <div class="row-mine" style="margin-top: 7px;">
-                                <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
-                                <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
-                                <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
-                              </div>
-                              <div class="description-section">
-                                <p>{{post.description}}</p>
-                              </div>
-                            
-                        </div>
-                    </div>
-                    
-                    {%elif post.type == "video"%}
-                    <div class="post">
-                        <div>
-                            <video class="post-video" loop autoplay muted>
-                                <source src={{post.thumbnail}}>
-                            </video>
-                            <div class="row-mine" style="margin-top: 2px;">
-                                <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
-                                <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
-                                <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
-                                <button class="button-mine mute-unmute-button">
-                                    <i class="fa fa-volume-up" style="margin-right: 2px;"></i>
-                                    <span>Unmute</span>
-                                </button>
+        </div>
+        <div style="margin-left: 17vh;">
+            <ul class="nav nav-pills" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Movies Worked</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Posts</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent" style="padding-top: 10px;">
+                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0" style="border-color: #FFFFFF;">
+                    <div class="container">
+                        <div class="row">
+                            {%for movie in user.movies_worked%}
+                            <div class="col">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <img src={{movie.thumbnail}} alt="Avatar" style="width:300px;height:400px;">
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h1>{{movie.title}}</h1>
+                                            <p>{{movie.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="description-section">
-                                <p>{{post.description}}</p>
-                            </div>
+                            {%endfor%}
                         </div>
                     </div>
-                    {%endif%}
-
-                    {%endfor%}
+                </div>
+                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                    <div class="container-mine">
+                        <div class="section">
+                            {%for post in user.posts%}
+                            {%if post.type == "image"%}
+                            <div class="post">
+                                <div>
+                                    <img src={{post.thumbnail}} alt="Profile Picture">
+                                    <div class="row-mine" style="margin-top: 7px;">
+                                        <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
+                                        <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                                        <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
+                                    </div>
+                                    <div class="description-section">
+                                        <p>{{post.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {%elif post.type == "video"%}
+                            <div class="post">
+                                <div>
+                                    <video class="post-video" loop autoplay muted>
+                                        <source src={{post.thumbnail}}>
+                                    </video>
+                                    <div class="row-mine" style="margin-top: 2px;">
+                                        <a class="like-button"><i class="fa fa-heart" style="margin-right: 2px;"></i>Like</a>
+                                        <a class="like-button"><i class="fa fa-comments" style="margin-right: 2px;"></i>Comment</a>
+                                        <a class="like-button"><i class='fas fa-share-square' style="margin-right: 2px;"></i>share</a>
+                                        <button class="button-mine mute-unmute-button">
+                                        <i class="fa fa-volume-up" style="margin-right: 2px;"></i>
+                                        <span>Unmute</span>
+                                        </button>
+                                    </div>
+                                    <div class="description-section">
+                                        <p>{{post.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {%endif%}
+                            {%endfor%}
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-          </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
 </html>
