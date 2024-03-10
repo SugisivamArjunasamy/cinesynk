@@ -44,3 +44,9 @@ class Service(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.posted_by}"
+    
+class Message(models.Model):
+    sender = models.ForeignKey(ProfessionalUser, on_delete=models.CASCADE, related_name='sent_messages')
+    recipient = models.ForeignKey(ProfessionalUser, on_delete=models.CASCADE, related_name='received_messages')
+    timestamp = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()

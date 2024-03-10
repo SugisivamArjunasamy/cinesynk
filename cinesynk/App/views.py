@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .serializers import ProfessionalUserSerializer
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import LoginForm, SearchForm
+from .forms import LoginForm, SearchForm, RegistrationForm
 from .models import ProfessionalUser, MoviesWorked, Posts, Service
 
 def home_view(request):
@@ -146,14 +146,31 @@ def vedioservices(request):
 def registerop(request):
     return render(request,'registerop.html')
 
-def GeneralRegister(request):
-    return render(request, 'guRegister.html')
+def register_view(request):
+    user_type = request.GET.get('type')
+    if not user_type:
+        return HttpResponseRedirect(reverse('registerop'))
 
-def directorRegister(request):
-    return render(request, 'directorRegister.html')
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        print("POST METHOD")
+        
+        if form.is_valid():
+            print('form is valid')
 
-def studioRegister(request):
-    return render(request,'studioRegister.html')
+            email = form.cleaned_data.get('email')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            confirmpassword = form.cleaned_data.get('confirmPassword')
+            print(email, username, password, confirmpassword, user_type)
+        else:
+            print('form is not valid')
+        return render(request, 'register.html', {'user_type': user_type})
+        
+    else:
+        print(user_type)
+        return render(request, 'register.html', {'user_type': user_type})
+
 
 def post(request):
     user_token = request.session.get('user_token')
@@ -164,3 +181,9 @@ def post(request):
     
     posts = posts = Posts.objects.order_by('-posted_time')
     return render(request, 'post.html', {"profile_img" : profile_img, "posts" : posts})
+
+def chat_view(request):
+    user_token = request.session.get('user_token')
+    profile_img = request.session.get('profile_img')
+    
+    return render(request, "chat.html", {"profile_img" : profile_img})
