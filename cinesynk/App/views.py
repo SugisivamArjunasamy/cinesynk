@@ -99,7 +99,14 @@ def audioservices(request):
     
     if not user_token:
         return HttpResponseRedirect(reverse('login'))
-    return render(request, 'audiose.html', {"profile_img" : profile_img})
+    
+    try:
+        provided_services = Service.objects.all().filter(service_type="audio").order_by('-added_time')
+        
+    except Service.DoesNotExist:
+            provided_services = []
+            
+    return render(request,'audiose.html', {"profile_img" : profile_img, "services" : provided_services})
 
 def vedioservices(request):
     user_token = request.session.get('user_token')
@@ -107,7 +114,14 @@ def vedioservices(request):
     
     if not user_token:
         return HttpResponseRedirect(reverse('login'))
-    return render(request,'vediose.html', {"profile_img" : profile_img})
+    
+    try:
+        provided_services = Service.objects.all().filter(service_type="video").order_by('-added_time')
+        
+    except Service.DoesNotExist:
+            provided_services = []
+            
+    return render(request,'vediose.html', {"profile_img" : profile_img, "services" : provided_services})
 
 def registerop(request):
     return render(request,'registerop.html')
