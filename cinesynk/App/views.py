@@ -223,7 +223,10 @@ def chat_view(request):
                 }
 
         unique_users = list(conversations.values())
-        recipient_email = unique_users[0]['email']
+        if len(unique_users) > 0:
+            recipient_email = unique_users[0]['email']
+        else:
+            recipient_email = ""
         return render(request, "chat.html", {"profile_img" : profile_img, "messages" : messages, "current_user" :user_email, "conversations" : unique_users,  'recipient_email' : recipient_email})
 
 
