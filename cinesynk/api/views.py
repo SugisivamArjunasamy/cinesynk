@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
-from .serializing import EmailSerializer, ProfessionalUserSerializer, UpdateFieldSerializer, CreateProfessionalUserSerializer
+from .serializing import EmailSerializer, ProfessionalUserSerializer, UpdateFieldSerializer, CreateProfessionalUserSerializer, MoviesWorked, PostsSerializer
 from App.models import ProfessionalUser
 
 @api_view(['GET'])
@@ -52,3 +52,51 @@ def create_professional_user(request):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+@api_view(['PUT'])
+def add_movie_worked(request):
+    serializer = MoviesWorked(data=request.data)
+    if serializer.is_valid():
+        email = serializer.validated_data['email']
+        thumbnail = serializer.validated_data['thumbnail']
+        title = serializer.validated_data['title']
+        description = serializer.validated_data['description']
+
+        try:
+            professional_user = ProfessionalUser.objects.get(email=email)
+            professional_user.movies_worked.append({
+                'thumbnail': thumbnail,
+                'title': title,
+                'description': description
+            })
+            professional_user.save()
+            return Response("Movie worked added successfully")
+        
+        except ProfessionalUser.DoesNotExist:
+            return Response("Professional user does not exist", status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['PUT'])
+def add_post(request):
+    serializer = PostsSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        email = serializer.validated_data['email']
+        thumbnail = serializer.validated_data['thumbnail']
+        post_type = serializer.validated_data['type']
+        description = serializer.validated_data['description']
+        
+        try:
+            professional_user = ProfessionalUser.objects.get(email=email)
+            professional_user.posts.append({
+                'thumbnail': thumbnail,
+                'type': post_type,
+                'description': description
+            })
+            professional_user.save()
+            return Response("Post added successfully")
+        
+        except ProfessionalUser.DoesNotExist:
+            return Response("Professional user does not exist", status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
