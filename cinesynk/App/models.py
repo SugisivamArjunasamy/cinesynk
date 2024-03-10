@@ -9,16 +9,18 @@ class ProfessionalUser(models.Model):
     profile_img = models.TextField(max_length=512, default='')
     experience = models.CharField(max_length = 125)
     location = models.CharField(max_length = 125)
-    user_type = models.CharField(max_length=125,  default='')
-    movies_worked = ArrayField(
-        models.JSONField(blank=True, null=True),
-        default=list,
-        blank=True,
-        null=True
-    )
-    posts = ArrayField(
-        models.JSONField(blank=True, null=True),
-        default=list,
-        blank=True,
-        null=True
-    )
+    user_type = models.TextField(max_length=512, default='')
+
+class Posts(models.Model):
+    posted_by = models.ForeignKey(ProfessionalUser, on_delete=models.CASCADE)
+    source = models.TextField(max_length=512, default='')
+    post_type = models.TextField(max_length=512, default='')
+    description = models.TextField(max_length=512, default='')
+    posted_time = models.DateTimeField()
+
+class MoviesWorked(models.Model):
+    worked_by = models.ForeignKey(ProfessionalUser, on_delete=models.CASCADE)
+    thumbnail = models.TextField(max_length=512, default='')
+    title = models.CharField(max_length=125, default='')
+    description = models.TextField(max_length=512, default='')
+    added_time = models.DateTimeField()
