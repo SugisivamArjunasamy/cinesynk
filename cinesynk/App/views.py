@@ -15,9 +15,16 @@ def home_view(request):
         return HttpResponseRedirect(reverse('login'))
 
 def profile(request):
-    user_token = request.session.get('user_token')
+    user_email = request.GET.get('email')
+    if user_email:
+        user_token = user_email
+        user_type ='studio'
+
+    else:
+        user_token = request.session.get('user_token')
+        user_type = request.session.get('user_type')
+
     profile_img = request.session.get('profile_img')
-    user_type = request.session.get('user_type')
     
     if not user_token:
         return HttpResponseRedirect(reverse('login'))

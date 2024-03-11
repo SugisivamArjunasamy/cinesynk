@@ -50,8 +50,11 @@
             align-items: center;
         }
 
-
-  
+        a {
+        text-decoration: none;
+        color: inherit;
+      }
+        
     </style>
     <script>
         function redirect() {
@@ -74,29 +77,35 @@
     </div>
 </div>
 <div class="container">
-  {%for service in services%}
+  {% for service in services %}
   <div class="card mb-3" style="max-width: full;">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src={{service.thumbnail}} class="img-fluid rounded-start" alt="...">
+        <a href="{% url 'profile' %}?email={{ service.posted_by.email }}">
+          <img src="{{ service.thumbnail }}" class="img-fluid rounded-start" alt="...">
+        </a>
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{service.title}}</h5>
-          <p class="card-text">{{service.description}}</p>
-          <p class="card-text"><small class="text-body-secondary">{{service.posted_by}}</small></p>
-          <form action="{%url 'enquire'%}" method="post">
-            {%csrf_token%}
-            <input type="hidden" name="service_email" value="{{service.posted_by.email}}">
-            <input type="hidden" name="title" value="{{service.title}}">
-            <input type="hidden" name="description" value="{{service.description}}">
+          <h5 class="card-title">{{ service.title }}</h5>
+          <p class="card-text">{{ service.description }}</p>
+          <p class="card-text"><small class="text-body-secondary">
+            <a href="{% url 'profile' %}?email={{ service.posted_by.email }}">
+              {{ service.posted_by }}
+            </a>
+          </small></p>
+          <form action="{% url 'enquire' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="service_email" value="{{ service.posted_by.email }}">
+            <input type="hidden" name="title" value="{{ service.title }}">
+            <input type="hidden" name="description" value="{{ service.description }}">
             <button type="submit" class="btn btn-primary">Enquire</button>
           </form>
         </div>
       </div>
     </div>
   </div>
-  {%endfor%}
+{% endfor %}
 </div>
 </body>
 </html>
