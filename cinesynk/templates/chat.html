@@ -50,7 +50,7 @@
                 
                 {% for conversation in conversations %}
                   <li class="p-2">
-                    <a href="#!" class="d-flex justify-content-between">
+                    <a href="{% url 'profile' %}?email={{ conversation.email }}" class="d-flex justify-content-between">
                       <div class="d-flex flex-row">
                         <img src="{{ conversation.profile_img }}" alt="avatar"
                           class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
