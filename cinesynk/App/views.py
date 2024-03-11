@@ -164,13 +164,21 @@ def register_view(request):
 
         
         if form.is_valid():
-
-
             email = form.cleaned_data.get('email')
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            confirmpassword = form.cleaned_data.get('confirmPassword')
+            confirmpassword = form.cleaned_data.get('confirmpassword')
 
+            if password != confirmpassword:
+                return render(request, 'register.html', {"form": form, "error_message": "Passwords doesn't Match."})
+            try:
+                user = ProfessionalUser.objects.get(email=email)
+                return render(request, 'register.html', {"form": form, "error_message": "Email alreay registered"})
+            except ProfessionalUser.DoesNotExist:
+                ProfessionalUser.objects
+                return
+        else:
+            return render(request, 'login.html', {"form": form})
         return render(request, 'register.html', {'user_type': user_type})
         
     else:

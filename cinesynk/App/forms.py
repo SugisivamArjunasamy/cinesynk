@@ -11,7 +11,7 @@ class RegistrationForm(forms.Form):
     email = forms.EmailField(label='email', required=True)
     username = forms.CharField(label='username', required=True)
     password = forms.CharField(label='password', widget=forms.PasswordInput, required=True)
-    confirmpassword = forms.CharField(label='confirmPassword', widget=forms.PasswordInput, required=True)
+    confirmpassword = forms.CharField(label='confirmpassword', widget=forms.PasswordInput, required=True)
 
 class MessageForm(forms.Form):
     message = forms.CharField(label="message", required=True)

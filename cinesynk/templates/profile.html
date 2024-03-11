@@ -7,7 +7,7 @@
         <title>CineSynk</title>
         <style>
             .bg-custom-color {
-            background-color: #000 !important; /* Change background color to black */
+            background-color: #000 !important;
             }
             .bg {
             color: #e11b46;
@@ -16,7 +16,7 @@
             margin: 0 10px;
             }
             nav a {
-            color: #FFFFFF !important; /* Change text color to white */
+            color: #FFFFFF !important;
             text-decoration: none;
             margin: 0 10px;
             }
@@ -32,7 +32,7 @@
             }
             .second-image {
             position: absolute;
-            top: 120px; /* Adjust as needed */
+            top: 120px;
             left: 20%;
             transform: translateX(-50%);
             z-index: 1;
@@ -102,7 +102,7 @@
             width: 100%;
             }
             .row-mine {
-            background-color: #212121; /* Dark background */
+            background-color: #212121;
             overflow: hidden;
             width: 100%;
             border-radius: 3px;
@@ -111,37 +111,37 @@
             align-items: center;
             }
             .like-button {
-            color: #fff; /* White text color */
+            color: #fff;
             text-decoration: none;
             padding: 10px 20px;
             transition: background-color 0.3s;
             border-radius: 3px;
             }
             .like-button:hover {
-            background-color: #424242; /* Darker background on hover */
+            background-color: #424242;
             }
             .like-button.active {
-            background-color: #4CAF50; /* Active button color */
+            background-color: #4CAF50;
             }
             .description-section {
-            background-color: #333; /* Dark background color */
-            color: #fff; /* White text color */
+            background-color: #333;
+            color: #fff;
             padding: 20px;
             text-align: center;
             }
             .button-mine {
-            color: #fff; /* White text color */
+            color: #fff;
             text-decoration: none;
             padding: 10px 20px;
             transition: background-color 0.3s;
             border-radius: 3px;
-            background-color: #3498db; /* Default background color */
-            border: none; /* Remove border */
+            background-color: #3498db;
+            border: none;
             cursor: pointer;
             display: inline-block;
             }
             .button-mine:hover {
-            background-color: #2980b9; /* Change background color on hover */
+            background-color: #2980b9;
             }
             #muteUnmuteIcon {
             margin-right: 5px;
@@ -158,12 +158,12 @@
                 if (video.muted) {
                     video.muted = false;
                     button.querySelector('span').textContent = "Mute";
-                    icon.className = "fa fa-volume-off"; // Change class directly
+                    icon.className = "fa fa-volume-off";
                     
                 } else {
                     video.muted = true;
                     button.querySelector('span').textContent = "Unmute";
-                    icon.className = "fa fa-volume-up"; // Change class directly
+                    icon.className = "fa fa-volume-up";
                 }
             }
             

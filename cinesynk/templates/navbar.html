@@ -1,7 +1,12 @@
 {%load static%}
 <nav class="navbar navbar-expand-lg bg-custom-color sticky-top">
     <div class="container-fluid">
-            <img src="{% static '/images/cinesynk.png' %}" alt="" style="width: 50px; height: 50px;">
+        <script>
+            function redirect_home() {
+                window.location.href = '/'
+            }
+        </script>
+            <img src="{% static '/images/cinesynk.png' %}" alt="" style="width: 50px; height: 50px;" onclick="return redirect_home()">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
